@@ -1,0 +1,70 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div></div>
+    <div class="header-title">
+      <h2 mat-dialog-title>{{ title }}</h2>
+        <button type="button" class="btn-close btn-close-white ms-auto" style="float: right; font-size: 1.5rem;"
+        data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close ></button>
+    </div>
+  </div>
+  
+  <form [formGroup]="profileform" (ngSubmit)="editUserProfile(profileform.value)">
+    <mat-dialog-content>
+      <mat-card>
+        <mat-card-content class="p-4">
+            <div class="row" >
+                <div class="col-4">
+                  <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" type="text" placeholder="First Name">
+                    <mat-error>This is a required field!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <mat-form-field>
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput formControlName="middleName" type="text" placeholder="Middle Name">
+                    <mat-error>This is a required field!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+      
+                    <input matInput formControlName="lastName" type="text" placeholder="Last Name">
+                  </mat-form-field>
+                </div>
+              </div>
+          <div class="row">
+            <div class="col-4">
+              <mat-form-field >
+                <mat-label>TIN Number</mat-label>
+                <input matInput formControlName="tinNumber" type="text" placeholder="Old Password">
+              </mat-form-field>
+            </div>
+  
+            <div class="col-4">
+              <mat-form-field >
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phoneNumber" type="text" placeholder="New Password">
+              </mat-form-field>
+            </div>
+  
+            <div class="col-4">
+              <mat-form-field >
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" type="text" placeholder="Repeat New Password">
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-dialog-content>
+   
+   
+  
+      <button class="form-button" type="submit" mat-flat-button mat-fab extended color="primary"
+      [disabled]="profileform.invalid">
+     <mat-icon>save</mat-icon>
+      <span class="text-button">{{label}}</span>
+      </button>
+  </form>

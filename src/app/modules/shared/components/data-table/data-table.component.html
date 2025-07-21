@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <!-- end card header -->
+
+      <div class="card-body">
+        <div class="row g-4 mb-3">
+          <div class="col-sm-auto">
+            <div class="d-flex gap-1">
+              @if(caption){
+              <div class="card-header">
+                <h4 class="card-title mb-0">{{ caption }}</h4>
+                @if(subTitle){
+
+                <p class="text-muted">
+                  {{ subTitle }}
+                </p>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="col-sm">
+            <div class="d-flex justify-content-sm-end">
+              <div class="search-box ms-2">
+                <input
+                  type="text"
+                  class="form-control search"
+                  placeholder="Search..."
+                  (input)="filterData($event)" />
+                <i class="ri-search-line search-icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead class="table-light">
+              <tr>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  @if(!sort){
+
+                  <th
+                    scope="col"
+                    class=" {{
+                      col.thClass || col.class || 'text-sm text-nowrap'
+                    }}">
+                    <span
+                      class=" {{
+                        col.thClass || col.class || 'text-sm text-nowrap'
+                      }}"
+                      [innerHtml]="col.header.trim()"></span>
+                  </th>
+
+                  } @if(sort){
+                  <th
+                    scope="col"
+                    class=" sort {{
+                      col.thClass || col.class || 'text-sm text-nowrap'
+                    }}"
+                    (click)="sortBy(col.value)">
+                    <span
+                      class=" {{
+                        col.thClass || col.class || 'text-sm text-nowrap'
+                      }}"
+                      [innerHtml]="col.header.trim()"></span>
+                  </th>
+                  }
+                </ng-container>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let item of params.items; let i = index"
+                id="dides_{{ params.items[i] }}">
+                <td
+                  *ngFor="let col of columns; let j = index"
+                  class=" {{
+                    col.tdClass || col.class || 'text-sm text-nowrap'
+                  }}"
+                  [style]="col.styles">
+                  <span *ngIf="col.value == 'index'" class="mx-2">{{
+                    i + j + 1
+                  }}</span>
+
+                  <span
+                    class="mx-1 {{
+                      col.tdClass || col.class || col.class || 'text-nowrap'
+                    }}">
+                    <ng-container
+                      *ngTemplateOutlet="
+                        getCellTemplate(col.value) || defaultCell;
+                        context: { $implicit: item, col: col, index: j }
+                      ">
+                    </ng-container>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="table-light"></tfoot>
+          </table>
+          <div *ngIf="!items || items.length === 0;">
+            <ng-template [ngTemplateOutlet]="emptyState"></ng-template>
+          </div>
+          
+          <ng-template #defaultCell let-item let-col="col" let-cols="cols">
+            <span
+              class=" {{ col.tdClass || col.class || 'text-sm text-nowrap' }}"
+              [innerHtml]="operations(col, utils.getColumnValue(item, col))">
+            </span>
+          </ng-template>
+        </div>
+        <div class="row justify-content-md-between align-items-md-center">
+          <div class="col col-sm-6">
+            <div
+              class="dataTables_info mb-2"
+              id="tickets-table_info"
+              role="status"
+              aria-live="polite">
+              Showing
+              {{ params.startIndex }} to {{ params.endIndex }} of
+              {{ params.totalRecords }}
+              entries
+            </div>
+          </div>
+          <!-- Pagination -->
+          <div class="col col-sm-6">
+            <div class="text-sm-right float-sm-end listjs-pagination">
+              <ngb-pagination
+                [collectionSize]="(params.total | async)!"
+                [(page)]="params.page"
+                [pageSize]="params.size"
+                (pageChange)="preparePaginationInfo(items)">
+              </ngb-pagination>
+            </div>
+          </div>
+          <!-- End Pagination -->
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end col -->
+</div>

@@ -1,0 +1,143 @@
+<div class="col-xxl-12">
+  <div class="card">
+    <div class="card-body">
+      <!-- Nav tabs -->
+      <ul ngbNav #ModifierCustom="ngbNav" [activeId]="1" class="nav nav-pills nav-customs nav-danger mb-3">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink class="nav-link">
+            EMPLOYEES
+          </a>
+          <ng-template ngbNavContent>
+            <!-- add button -->
+            <div class="col-sm-auto">
+              <div class="d-flex justify-content-end gap-1">
+                <button type="button" class="btn btn-primary add-btn" id="create-btn" (click)="createEmployee()">
+                  <i class="ri-add-fill align-center me-1" style="
+                                font-size: 1rem;"></i> ADD EMPLOYEE
+                </button>
+              </div>
+            </div>
+            <!-- table -->
+            <data-table [columns]="columns" [items]="employees" [sort]="true" caption="List of Registered Users"
+              subTitle="">
+        <ng-template pTemplate="sex" let-item>
+
+                  {{ item.sex === true ? "Male" : "Female" }}
+             
+              </ng-template>
+              <ng-template pTemplate="status" let-item>
+                <i class="{{
+                              item.enabled
+                                ? 'ri-checkbox-circle-fill text-success'
+                                : 'ri-close-circle-fill text-danger'
+                            }} align-middle "></i>
+                <span class="{{ item.enabled === true ? 'text-success' : 'text-danger' }}">
+                  {{ item.enabled === true ? "Active" : "Disabled" }}
+                </span>
+              </ng-template>
+
+              <ng-template pTemplate="locked" let-item>
+                <i class="{{
+                              item.locked
+                                ? 'ri-checkbox-circle-line text-success'
+                                : 'ri-close-circle-line text-danger'
+                            }} align-middle "></i>
+
+                <span class="{{ item.locked ? 'text-success' : 'text-danger' }}">
+                  {{ item.locked ? "Locked" : "Unlocked" }}
+                </span>
+              </ng-template>
+
+                 <ng-template pTemplate="actions" let-item let-index>
+                <button  [matMenuTriggerFor]="menu" mat-icon-button> 
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="updateEmployee(item)">
+                    <mat-icon color="primary">edit</mat-icon>Manage User
+                  </button>
+               
+                  <!-- <button mat-menu-item (click)="managePermission(item)">
+                    <mat-icon color="accent">list</mat-icon>Manage User Roles
+                  </button> -->
+               
+                </mat-menu>
+                </ng-template>
+            </data-table>
+
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink class="nav-link">
+            COLLECTORS
+          </a>
+          <ng-template ngbNavContent>
+            <div class="col-sm-auto">
+              <div class="d-flex justify-content-end gap-1">
+                <button type="button" class="btn btn-primary add-btn" id="create-btn" (click)="createCollector()">
+                  <i class="ri-add-fill align-center me-1" style="
+                                font-size: 1rem;"></i> ADD COLLECTOR
+                </button>
+              </div>
+            </div>
+            <!-- table -->
+            <data-table [columns]="collectorColumn" [items]="users" [sort]="true" caption="List of Registered Collectors"
+              subTitle="">
+            <ng-template pTemplate="sex" let-item>
+
+                  {{ item.sex === true ? "Male" : "Female" }}
+             
+              </ng-template>
+              <ng-template pTemplate="status" let-item>
+                <i class="{{
+                              item.enabled
+                                ? 'ri-checkbox-circle-fill text-success'
+                                : 'ri-close-circle-fill text-danger'
+                            }} align-middle "></i>
+                <span class="{{ item.enabled ? 'text-success' : 'text-danger' }}">
+                  {{ item.enabled ? "Active" : "Disabled" }}
+                </span>
+              </ng-template>
+
+               <ng-template pTemplate="collectorActions" let-item let-index>
+                <button  [matMenuTriggerFor]="menu" mat-icon-button> 
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="updateCollector(item)">
+                    <mat-icon color="primary">edit</mat-icon>Edit Collector
+                  </button>
+                  <button mat-menu-item (click)="viewCollectionSite(item)">
+                    <mat-icon color="primary">visibility</mat-icon>View Collector Site
+                  </button>
+                  <button
+                  mat-menu-item
+                  (click)="assignCollectionSites(item)"
+                >
+                  <mat-icon color="primary">add_task</mat-icon>Assign
+                  Collection Site
+                </button>
+
+                  <button mat-menu-item (click)="remove_collection_site(item)">
+                    <mat-icon color="accent">remove_circle</mat-icon>Remove collection site
+                  </button>
+               
+                  <!-- <button mat-menu-item (click)="managePermission(item)">
+                    <mat-icon color="accent">list</mat-icon>Manage User Roles
+                  </button> -->
+               
+                </mat-menu>
+                </ng-template>
+            </data-table>
+          </ng-template>
+        </li>
+    
+      </ul>
+      <div class="tab-content text-muted">
+        <div [ngbNavOutlet]="ModifierCustom"></div>
+      </div>
+    </div><!-- end card-body -->
+  </div>
+</div><!--end col-->

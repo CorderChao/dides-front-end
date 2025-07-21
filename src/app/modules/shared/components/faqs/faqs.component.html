@@ -1,0 +1,82 @@
+
+<div class="div">
+  <nav class="navbar navbar-expand-lg navbar-landing fixed-top bg-trans" id="navbar">
+      <div class="container">
+          <a class="navbar-brand" routerLink="/">
+              <!-- <h4 class="fw-bold text-white">dides</h4> -->
+              <img src="assets/images/emblem.png" class="card-logo card-logo-dark" alt="logo dark" height="60">
+          </a>
+          <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
+              <i class="ri-menu-line"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="mx-auto"></div>
+                  <a routerLink="/faqs" class="btn btn-link fw-medium text-decoration-none">FAQS</a>
+                  <a routerLink="/aboutus" class="btn btn-link fw-medium text-decoration-none">About us</a>
+              <div class="mx-auto"></div>
+              <div class="">
+                  <a class="navbar-brand" routerLink="/">
+                      <!-- <h4 class="fw-bold text-white">dides</h4> -->
+                  <img src="assets/images/logo.png" class="card-logo2 card-logo-dark mt-3" alt="logo dark" height="60">
+                  </a>
+              </div>
+             
+          </div>
+      </div>
+  </nav>
+</div>
+
+
+<div class="mainpage">
+  <div class="container">
+    <div class="bg-white p-4 rounded" style="min-width: 100%;">
+      <div class="mt-3">
+        <div class="d-flex align-items-center mb-2">
+          <div class="flex-shrink-0 me-1">
+            <i class="ri-question-line fs-24 align-middle text-success me-1"></i>
+          </div>
+         
+        </div>
+  
+         <div class="w-100 p-2">
+          <br><h5>Here is a Mostly asked Questions.</h5> 
+         </div>
+  
+  
+        <div ngbAccordion activeIds="static-1" [closeOthers]="true">
+          <div ngbAccordionItem id="static-1"  [collapsed]="false">
+            <div ngbAccordionHeader class="accordion-header border-0 bg-transparent" data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne" id="gen-ques-headingOne">
+              <button ngbAccordionButton>
+                 {{questionOne?.question}}
+              </button>
+            </div>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="accordion-body">
+                {{questionOne?.answer}}
+              </div>
+            </div>
+          </div>
+          <div ngbAccordionItem id="static-{{i+2}}" *ngFor="let value of faqs; let i = index">
+            <div ngbAccordionHeader class="accordion-header border-0 bg-transparent">
+              <button ngbAccordionButton>
+                {{value?.question}}
+              </button>
+            </div>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="accordion-body">
+             {{value?.answer}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="last-main">
+  <p class="text-footer"> DIDES &#64;2024 </p>
+</div>
+

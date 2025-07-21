@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header border-0 align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">
+           Revenue Collection
+        </h4>
+       
+      </div>
+      <!-- end card header -->
+
+      <div class="card-header p-0 border-0 bg-light-subtle">
+        <div class="row g-0 text-center" >
+          <div class="col-3 col-sm-3" >
+            <div class="p-5 border border-dashed border-start-0"
+             style="background-color: #8C6134">
+              <h5 class="mb-1">
+                <span 
+                  [countUp]="990000"
+                  class="counter-value"
+                  [options]="option"></span>
+              </h5>
+              <p class="text-muted mb-0">Today's Collection</p>
+            </div>
+          </div>
+          <!--end col-->
+          <div class="col-3 col-sm-3">
+            <div class="p-5 border border-dashed border-start-0" 
+            style="background-color: #5D5E37">
+              <h5 class="mb-1">
+                <span
+                  [countUp]="702600"
+                  class="counter-value"
+                  [options]="option"></span>
+              </h5>
+              <p class="text-muted mb-0">This Week Collections</p>
+            </div>
+          </div>
+
+          <div class="col-3 col-sm-3">
+            <div class="p-5 border border-dashed border-start-0" 
+            style="background-color: #2F5A3B">
+              <h5 class="mb-1">
+                <span
+                  [countUp]="1602000"
+                  class="counter-value"
+                  [options]="option"></span>
+              </h5>
+              <p class="text-muted mb-0">This Month Collections</p>
+            </div>
+          </div>
+          <!--end col-->
+          <div class="col-3 col-sm-3">
+            <div class="p-5 border border-dashed border-start-0"
+             style="background-color: #00563F">
+              <h5 class="mb-1">
+                <span
+                  [countUp]="5600000"
+                  [options]="option"
+                  class="counter-value"></span>
+              </h5>
+              <p class="text-muted mb-0">This Financial Year Collections</p>
+            </div>
+          </div>
+     
+          <!--end col-->
+        </div>
+      </div>
+      <!-- end card header -->
+      <br /> <br/>
+      <div class="card-header border-0 align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">
+           Revenue Collection vs Revenue Projections
+        </h4>
+       
+      </div>
+      <div class="card-body p-0 pb-2">
+        <div class="mb-n3">
+          <apx-chart
+            [series]="OverviewChart.series"
+            [chart]="OverviewChart.chart"
+            [stroke]="OverviewChart.stroke"
+            [fill]="OverviewChart.fill"
+            [markers]="OverviewChart.markers"
+            [xaxis]="OverviewChart.xaxis"
+            [grid]="OverviewChart.grid"
+            [legend]="OverviewChart.legend"
+            [plotOptions]="OverviewChart.plotOptions"
+            [colors]="OverviewChart.colors"
+            [tooltip]="OverviewChart.tooltip"
+            dir="ltr"></apx-chart>
+        </div>
+      </div>
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>

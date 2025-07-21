@@ -1,0 +1,86 @@
+
+
+<div class="wrapper">
+    <div class="profile-foreground position-relative mx-n4 mt-n4">
+        <div class="profile-wid-bg">
+            <img src="assets/images/slide2.jpeg" alt="" class="profile-wid-img" />
+        </div>
+       
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-sm-10">
+                <div class="text-center mt-lg-5 pt-5">
+                    <h1 class="display-10 fw-semibold mb-3 lh-base">
+                        Welcome 
+                    </h1>
+                    <h2 class="display-8 fw-semibold mb-3 lh-base">
+                       Mohamed Enterprises Ltd to, <span
+                            class="text-success">&nbsp;&nbsp;DIDES </span></h2>
+                    <p class="lead text-white lh-base">
+                        TIN:&nbsp;&nbsp;<span class="text-success">111-111-111</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Phone Number:&nbsp;&nbsp;<span class="text-success">0789 001 002</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        e-mail:&nbsp;&nbsp;<span class="text-success">mohamedenterprise&#64;yahoo.com</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Address:&nbsp;&nbsp;<span class="text-success">1229 Dar es Salaam</span>
+                    </p>
+        
+                    <div class="d-flex gap-2 justify-content-end mt-4">
+                        <a routerLink="/signup/basic" class="btn btn-primary">Edit Profile<i
+                            i class="ri-pencil-line align-middle ms-1"></i></a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section nft-hero" id="hero">
+        <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-2">
+                    <div class="email-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-0">
+                        <div class="email-menu-sidebar" id="menusidebar">
+                            <div class="p-4 d-flex flex-column h-0">
+                                <div class="pb-4 border-bottom border-bottom-dashed">
+                                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
+                                        data-bs-target="#composemodal">
+                                        Apply
+                                    </button>
+                                </div>
+                                <ngx-simplebar class="mx-n4 px-4 email-menu-sidebar-scroll">
+                                    <div class="mail-list mt-3">
+                                        <a href="javascript:void(0);" class="active"  (click)="categoryFilter($event,'sent')">
+                                            <i class="ri-send-plane-2-fill me-3 align-middle fw-medium"></i>
+                                            <span class="mail-list-link">Applications</span>
+                                        </a>
+                                        <a href="javascript:void(0);" (click)="categoryFilter($event,'all')">
+                                            <i class="ri-mail-fill me-3 align-middle fw-medium"></i>
+                                            <span class="mail-list-link">Receipts</span>
+                                            <span class="badge bg-success-subtle text-success ms-auto">{{dataCount}}</span>
+                                        </a>
+                                        <a href="javascript:void(0);" (click)="categoryFilter($event,'inbox')">
+                                            <i class="ri-inbox-archive-fill me-3 align-middle fw-medium"></i>
+                                            <span class="mail-list-link">Permits</span>
+                                            <span class="badge bg-success-subtle text-success ms-auto">5</span>
+                                        </a>
+                                       
+                                    </div>
+                                </ngx-simplebar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-1">
+                                <div class="scrollbar-inner scroll-content scroll-scrolly_visible scrollbar">
+                                    <br>
+                                    <br>
+                                    <div class="form-check px-6" *ngFor="let option of emailData">
+                                        <input class="form-check-input" type="checkbox" name="checkActor" [id]="option.id" [checked]="false" >
+                                        <label class="form-check-label" [for]="option.id">{{ option.teaser }}</label>
+                                      </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,7 @@
+export enum StorageKey {
+  CURRENT_USER = 'userInfo',
+  AUTH_TOKEN = 'AUTH_TOKEN',
+  REFRESH_TOKEN = 'REFRESH_TOKEN',
+  EXPIRE = 'EXPIRE',
+  THEME_COLOR = 'THEME_COLOR',
+}

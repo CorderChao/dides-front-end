@@ -1,0 +1,312 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$dides-primary: mat.define-palette(mat.$indigo-palette);
+$dides-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$dides-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$dides-theme: mat.define-light-theme((
+  color: (
+    primary: $dides-primary,
+    accent: $dides-accent,
+    warn: $dides-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($dides-theme);
+
+/* You can add global styles to this file, and also import other style files */
+// Swiper
+.coverflowslide .slide {
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.coverflowslide .slick-list {
+    overflow: hidden !important;
+}
+
+.coverflowslide .slick-center {
+    transform: scale(1.2); // Adjust the scale factor for the "Coverflow" effect
+    z-index: 1;
+}
+
+.coverflowslide .carousel {
+    width: 100%;
+    max-width: 600px; // Adjust the carousel width as needed
+    margin: 0 auto;
+}
+
+.space .slick-slide {
+    margin: 10px;
+}
+
+#notificationItemsTabContent {
+    .avatar-title {
+        height: 30px !important;
+        width: 30px !important;
+    }
+}
+
+[data-bs-theme="dark"] {
+    .fc {
+        .fc-multimonth-daygrid {
+            background: #212529 !important;
+
+        }
+
+        .fc-day-disabled {
+            background: #282b2e !important;
+        }
+
+        .fc-multimonth {
+            border-color: #32383e !important;
+        }
+    }
+}
+
+
+#landingnft{
+    .slick-dots{
+        bottom: -36px;
+        z-index: 1;
+        .slick-active{
+            button{
+                background-color: #3577f1 !important;
+            }
+        }
+    }
+    .slick-dots li{
+        height: 7px !important;
+    }
+    .slick-dots li button {
+        width: 22px !important;
+        height: 5px !important;
+        border: none;
+        background-color: rgba(109,98,253,.2) !important;
+        padding: 0px;
+        margin: 0px;
+        transition: all .3s;
+        border-radius: 50px;
+        &::before{
+            display: none;
+        }
+    }
+
+}
+
+.bg-normal{
+    background-color: #405189 !important;
+}
+
+.text-upper{
+    text-transform: uppercase;
+}
+.ls-1{
+    letter-spacing: 1px;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-dialog-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(17, 17, 17, 0.493);
+  }
+  .mat-dialog-box {
+    border-radius: 0 !important;
+    .mat-dialog-header {
+      text-align: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.061);
+      background-color:  #405189  !important;
+      padding: 0.7rem 0.8rem;
+  
+      .modal-icon {
+        margin-top: 6px;
+        color: rgb(255, 255, 255);
+      }
+  
+      .header-title {
+        h2 {
+          display: inline;
+          color: rgb(255, 255, 255);
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+      }
+  
+      .close-button {
+        mat-icon {
+          color: rgb(255, 255, 255);
+        }
+  
+        border-radius: 50%;
+      }
+    }
+  
+    
+    mat-dialog-container {
+      padding: 0 !important;
+      border-radius: 0 !important;
+      padding-top: 0px !important;
+      padding-bottom: 1.7rem !important;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      overflow-y: hidden !important;
+      overflow-x: hidden !important;
+    }
+  
+    mat-dialog-content {
+      mat-card{
+        box-shadow: none !important;
+      }
+      border-radius: 0 !important;
+      padding: 0.4rem 2rem 0rem 2rem !important;
+  
+      mat-card{
+        box-shadow: none !important;
+      }
+    }
+  
+    mat-dialog-title {
+      background: #16a085 !important;
+      width: 100% !important;
+    }
+  
+    mat-dialog-actions {
+      padding-right: 1rem !important;
+      border-radius: 0 !important;
+      background-color: #f5f5f5 !important;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .form-button {
+    bottom: 0;
+    margin: 10px !important; 
+    float: right !important;
+    align-self: flex-end;
+    text-transform: uppercase;
+  }
+
+ .form-button .text-button{
+    font-size: 18px;
+  }
+  
+  .form-button{
+    transition: transform .5s, box-shadow 1s;
+  }
+  
+  .form-button:hover {
+    transform: scale(1.02) perspective(0px);
+    box-shadow: 0 10px 10px rgba(92, 82, 95, 0.9);
+  }
+
+  .form-button-back {
+    bottom: 0;
+    margin: 10px !important; 
+    float: left !important;
+    align-self: flex-end;
+    text-transform: uppercase;
+  }
+
+ .form-button-back .text-button{
+    
+    font-size: 18px;
+  }
+  
+  .form-button-back{
+    transition: transform .5s, box-shadow 1s;
+  }
+  
+  .form-button:hover {
+    transform: scale(1.02) perspective(0px);
+    box-shadow: 0 10px 10px rgba(92, 82, 95, 0.9);
+  }
+
+  
+.scrollbar-inner {
+	height: 100%;
+	overflow: auto
+}
+
+.scrollbar-inner>.scroll-element {
+	transition: opacity .3s;
+	margin-right: 2px
+}
+
+@media screen and (prefers-reduced-motion:reduce) {
+	.scrollbar-inner>.scroll-element {
+		transition: none
+	}
+}
+
+.scrollbar-inner>.scroll-element.scroll-y {
+	width: 3px;
+	right: 0
+}
+
+.scrollbar-inner>.scroll-element.scroll-x {
+	height: 3px;
+	bottom: 0
+}
+
+.scrollbar-inner>.scroll-element .scroll-bar,
+.scrollbar-inner>.scroll-element .scroll-element_track {
+	transition: background-color .3s
+}
+
+@media screen and (prefers-reduced-motion:reduce) {
+	.scrollbar-inner>.scroll-element .scroll-bar,
+	.scrollbar-inner>.scroll-element .scroll-element_track {
+		transition: none
+	}
+}
+
+.scrollbar-inner>.scroll-element .scroll-element_track {
+	background-color: transparent
+}
+
+.scrollbar-inner:not(:hover) .scroll-element {
+	opacity: 0
+}
+
+.spacer{
+  flex:5 5 auto;
+}
+
+.emptyTable{
+  color: #0c3b8d;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 10px;
+}

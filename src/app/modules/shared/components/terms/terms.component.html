@@ -1,0 +1,68 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div></div>
+    <div class="header-title">
+        <h2 mat-dialog-title>{{ title }}</h2>
+        <button type="button" class="btn-close btn-close-white ms-auto"
+            style="float: right; font-size: 1rem;padding-top: 20px" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close>
+        </button>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="row" id="printingAreaDiv">
+    <div class="cert-heading text-center bb-dotted">
+                                        <div class="row">
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <span class="circular_image">
+                                                        <img [src]="logo" alt="" height="80" width="80">
+                                                    </span>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+
+                                            </div>
+
+                                            <div class="col-md-8 my-auto">
+                                                <h4 class="my-1">THE UNITED REPUBLIC OF TANZANIA</h4>
+                                                <h4>{{organization?.name}}</h4>
+                                                <h4 class="my-1">Terms and Conditions</h4>
+                                            </div>
+                                            <div class="col-md-2">
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                    <div class="certificate-content">
+                        <div class="row">
+                            <mat-list>
+                                <mat-list-item *ngFor="let term of terms let i =index">{{i+1}}.
+                                    {{term.termsAndConditionDescription}}</mat-list-item>
+                            </mat-list>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+
+    <!-- <button class="btn btn-primary" *ngIf="code === 1" type="button" (click)="initialize(application.uuid)">Initialize</button> -->
+    <!-- <button *ngIf="application?.applicationStatus?.name === 'REJECTED'" class="form-button" type="submit"
+    mat-raised-button mat-fab extended color="primary" (click)="initialize(application.uuid)">Resend</button> -->
+
+</div>

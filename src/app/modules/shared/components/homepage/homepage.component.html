@@ -1,0 +1,167 @@
+
+<div class="div">
+    <nav class="navbar navbar-expand-lg navbar-landing fixed-top bg-trans" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/">
+                <!-- <h4 class="fw-bold text-white">dides</h4> -->
+                <img src="assets/images/emblem.png" class="card-logo card-logo-dark" alt="logo dark" height="60">
+            </a>
+            <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
+                <i class="ri-menu-line"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="mx-auto"></div>
+                    <a routerLink="/faqs" class="btn btn-link fw-medium text-decoration-none">FAQS</a>
+                    <a routerLink="/aboutus" class="btn btn-link fw-medium text-decoration-none">About us</a>
+                    <!-- <a routerLink="/aboutus" class="btn btn-normal fw-medium  text-decoration-none">Terms & Conditions</a> -->
+                <div class="mx-auto"></div>
+                <div class="">
+                    <a class="navbar-brand" routerLink="/">
+                        <!-- <h4 class="fw-bold text-white">dides</h4> -->
+                    <img src="assets/images/logo.png" class="card-logo2 card-logo-dark mt-3" alt="logo dark" height="90">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+ <div class="mainpage">
+    <div class="carousel-images">
+        <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators"   [interval]="8000" class="carousel-inner">
+            <ng-template ngbSlide>
+                <img src="assets/images/slide1.jpeg"  alt="...">
+            </ng-template>
+            <ng-template ngbSlide>
+                <img src="assets/images/slide2.jpeg"  alt="...">
+            </ng-template>
+            <ng-template ngbSlide>
+                <img src="assets/images/slide3.jpeg"  alt="...">
+            </ng-template>
+            <ng-template ngbSlide>
+                <img src="assets/images/slide4.JPG"  alt="...">
+            </ng-template>
+        </ngb-carousel>
+    </div>
+    <div class="overlay-color">
+    <div class="section homepage">
+        <div class="p-1 container">
+            <div class="py-1  main-contents pl-0 pr-5 col-12 ">
+                <div class="typewriter">
+                <p class="welcome-text"><span class="text-yellow">DODOMA INSTITUTE OF DEVELOPMENT AND</span> </p>
+                 <p class="welcome-text"><span class="blue-text"> ENTREPRENEURSHIP STUDIES (DIDES)</span></p>
+                <p class="welcome-text"><span class="bracket-text"></span></p>
+            </div>
+            </div>
+        </div>
+        <div class="d-flex gap-3 justify-content-center mt-4">
+              <a routerLink="/online-application" class="btn btn-secondary">Online Application</a>
+            <a routerLink="/login" class="btn btn-success">Staff's Login</a>
+            <button class="btn btn-danger" (click)="openEnd(filtetcontent, 'LOGIN')">Student's Login</button>
+        </div>       
+    </div>
+
+    <div class="last-main">
+       <p class="text-footer"> DIDES &#64;2025 </p>
+    </div>
+</div>
+</div>
+
+<ng-template #filtetcontent let-offcanvas>
+    <div class="d-flex align-items-center bg-primary bg-gradient p-3 offcanvas-header">
+        <h5 class="m-0 me-2 text-white">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white ms-auto " data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="text-center mt-sm-3 mb-4 text-white-50">
+                    <div>
+                        <a href="javascript:void(0);" class="d-inline-block auth-logo">
+                            <img src="../../../../../assets/images/logo.png" alt="" height="100" widit="auto">
+                        </a>
+                    </div>
+                </div>
+                <div class="row p-2 d-flex justify-content-center">
+                
+
+                    <form [formGroup]="loginForm" *ngIf="title === 'LOGIN' && !resetPass">
+                        <div class="mb-1">
+                            <label class="form-label" for="username">E - MAIL</label>
+                            <input type="username" class="form-control" id="username" formControlName="username"
+                                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" placeholder="E-Mail">
+                            @if (submitted && f['username'].errors) {
+                            <div class="invalid-feedback">
+                                @if(f['username'].errors['required']){
+                                <div>E - MAIL is required</div>}
+                                @if(f['username'].errors['username']){
+                                <div>Error..
+                                </div>
+                                }
+                            </div>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password-input">Password</label>
+                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5"
+                                    placeholder="Enter password" id="password-input" formControlName="password"
+                                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                <button
+                                    class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                    type="button" id="password-addon"><i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType
+                          }" (click)="toggleFieldTextType()"></i></button>
+                                @if (submitted && f['password'].errors) {
+                                <div class="invalid-feedback">
+                                    @if(f['password'].errors['required']){
+                                    <span>Password is required</span>
+                                    }
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <a style="cursor:pointer;" (click)="searchUserByEmail()" class="link">Forgot Password?</a>
+
+                        <div class="mt-4">
+                            <button [disabled]="loginForm.invalid" (click)="onSubmit(loginForm.value)" class="btn btn-primary w-100" type="submit">Sign In</button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p class="mb-0">Don't have an account ? <a routerLink="#" class="link">Register</a> </p>
+                        </div>
+                    </form>
+
+                    <form [formGroup]="loginForm" *ngIf="title === 'LOGIN' && resetPass">
+                        <div class="mb-1">
+                            <p>Enter Registered e-mail to reset your Password</p>
+                            <label class="form-label" for="username">E-MAIL</label>
+                            <input type="username" class="form-control" id="username" formControlName="username"
+                                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" placeholder="E - MAIL">
+                            @if (submitted && f['username'].errors) {
+                            <div class="invalid-feedback">
+                                @if(f['username'].errors['required']){
+                                <div>e-mail is required</div>}
+                                @if(f['username'].errors['username']){
+                                <div>Error..
+                                </div>
+                                }
+                            </div>
+                            }
+                        </div>                             
+                        <div class="mt-4" >
+                            <button [disabled]="loginForm.invalid" (click)="forgotPassword(loginForm.value.username)" class="btn btn-primary w-100" type="submit">Reset Password</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

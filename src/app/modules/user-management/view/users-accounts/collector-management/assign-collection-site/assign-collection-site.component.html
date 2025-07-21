@@ -1,0 +1,105 @@
+<div
+  class="mat-dialog-header"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <div class="header-title">
+    <h2 mat-dialog-title>{{ title }}</h2>
+    <button
+      type="button"
+      class="btn-close btn-close-white ms-auto"
+      style="float: right; font-size: 1rem; padding-top: 20px"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+      mat-dialog-close
+    ></button>
+  </div>
+</div>
+<mat-dialog-content>
+  <div class="p-4 bg-white law-review rounded">
+    <form
+      action="#"
+      class="form-container"
+      [formGroup]="assignCollectionSiteForm"
+    >
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <!-- <input
+              matInput
+              formControlName="regionName"
+              type="text"
+              readonly="true"
+            /> -->
+            <mat-select
+              matInput
+              formControlName="regionName"
+              placeholder="Choose Region"
+            >
+              <mat-option [value]="item.uuid" *ngFor="let item of regions" (click)="onRegionChange(item)"
+              >{{
+                item.name
+              }}</mat-option>
+            </mat-select>
+            <mat-error>This is required field!</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-select
+              matInput
+              formControlName="councilName"
+              (selectionChange)="onCouncilChange($event)"
+              placeholder="Choose Council"
+            >
+              <mat-option [value]="item.street.ward.council.uuid" *ngFor="let item of councils">{{
+                item.street.ward.council.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-select
+              formControlName="selectedSite"
+              (selectionChange)="addSite()"
+              placeholder="Choose Collection Site"
+            >
+              <mat-option
+                [value]="site"
+                *ngFor="let site of CouncilcollectionSites"
+                >{{ site.name }}({{ site.code }})</mat-option
+              >
+            </mat-select>
+            <mat-error>This is required field!</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- <div class="mb-3">
+        <label for="selectedDevices" class="form-label">Selected Devices:</label>
+        <ul id="selectedDevices" class="list-group">
+          <li class="list-group-item" *ngFor="let site of selectedCollectionSites; let i = index">
+            {{ site.code }}
+            <button type="button" class="btn btn-sm btn-danger" (click)="removeSite(i)">Remove</button>
+          </li>
+          <li class="list-group-item" *ngIf="selectedCollectionSites.length === 0">No devices selected</li>
+        </ul>
+      </div> -->
+
+      <button
+        class="form-button"
+        type="submit"
+        mat-raised-button
+        mat-fab
+        extended
+        color="primary"
+        (click)="assignCollectionSite()"
+        [disabled]="assignCollectionSiteForm.invalid"
+      >
+        <mat-icon>save</mat-icon>
+        <span class="text-button"> {{label}} </span>
+      </button>
+    </form>
+  </div>
+</mat-dialog-content>

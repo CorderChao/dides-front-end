@@ -1,0 +1,257 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="header-title">
+        <h2 mat-dialog-title>{{ title }}</h2>
+        <button type="button" class="btn-close btn-close-white ms-auto" style="float: right; font-size: 1.5rem;"
+            data-bs-dismiss="offcanvas" aria-label="Close" mat-dialog-close></button>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <ng-container *ngIf="bill$ | async as bill">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="row" id="printingAreaDiv">
+                                <div class="certificate-content">
+                                    <div class="cert-heading text-center bb-dotted">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <img alt="" class="client-logo" src="assets/images/emblem.png"
+                                                    height="120px" width="110px" title="Logo" />
+                                            </div>
+
+
+                                            <div class="col-md-8 my-auto">
+                                                <h4 class="my-1">The Republic of Tanzania</h4>
+                                                <h4>The Tanzania National Roads Agency (TANROADS)</h4>
+                                                <h4 class="my-1">Government Bill</h4>
+                                            </div>
+
+                                            <div class="col-md-2 pt-2">
+                                                 <span class="client-logo">
+                                                        <img [src]="logo" alt="" height="110px" width="85px">
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cert-text">
+                                        <div class="text">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Control Number</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class=""> {{ bill?.controlNumber }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Payment Reference</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ bill?.reference }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Sp Code</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ bill.spCode }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Payer Name</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class=""> {{ bill?.payerName }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Payer Phone</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ bill?.payerPhone }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-2">
+                                                    <div class="qrcode">
+                                                        <span *ngIf="qrdata | async | json as data">
+                                                            <qrcode [elementType]="'svg'" [errorCorrectionLevel]="'M'"
+                                                                [margin]="1" [qrdata]="data" [width]="115">
+                                                            </qrcode>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2">
+                                                <div class="row">
+                                                    <div class="col-md-2"><b>In Respect of</b></div>
+                                                    <div class="col-md-5 text-left"><b>Items Description (s)</b></div>
+                                                    <div class="col-md-2 text-left "><b>Quantity</b></div>
+                                                    <div class="col-md-3 "><b>Items Amount</b></div>
+                                                </div>
+                                                <hr />
+                                                <div *ngFor="let item of bill?.billItems; let i =index" class="row">
+                                                    <div class="col-md-2">({{ i + 1}})</div>
+                                                    <div class="col-md-5">
+                                                        {{ item?.description }}
+                                                        <hr />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        {{ item?.quantity | number }}
+                                                        <hr />
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        {{ item?.totalAmount | number }}
+                                                        <hr />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 row">
+
+                                                    <div class="col-md-5 pl-4"><b>Total Billed Amount</b></div>
+                                                    <div class="col-md-3">
+                                                        <strong>{{ countTotal(bill?.billItems) | number }}
+                                                            ({{bill?.currency}}
+                                                            )</strong>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Amount in Words</div>
+                                                            <div class="col-md-7 dotted">
+                                                               {{writeWords(bill?.paidAmount) }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Expires On</div>
+                                                            <div class="col-md-7 dotted">
+                                                                <span>{{
+                                                                    bill?.controlNumberExpiredDate | date: "dd MMM yyyy"
+                                                                    }}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Date Issued</div>
+                                                            <div class="col-md-7 dotted">
+                                                                <span class="">{{
+                                                                    bill?.billDate | date: "dd MMM yyyy"
+                                                                    }}</span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Collection Center</div>
+                                                            <div class="col-md-7 dotted">
+                                                                <span class="">HEAD QUARTER</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Printed By</div>
+                                                            <div class="col-md-7 dotted">
+                                                                <span class="">{{user}}</span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Printed On</div>
+                                                            <div class="col-md-7 dotted">
+                                                                <span class="">{{ currentDate | date:'medium' }}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row my-2">
+                                                            <div class="col-md-5">Signature</div>
+                                                            <div class="col-md-7">
+                                                                <img [src]="" alt="" class="w-25" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cert-bottom">
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-6">
+                                                <h5><b>Jinsi ya Kulipa</b></h5>
+                                                <ol>
+                                                    <li>
+                                                        Kupitia Bank: Fika tawi lolote au wakala wa bank ya CRDB, NMB,
+                                                        BOT. Nambari ya kumbukumbu ni <b>{{ bill?.controlNumber }}</b>
+                                                    </li>
+                                                    <li>
+                                                        Kupitia Mitandao ya Simu
+                                                        <ul>
+                                                            <li>Ingia kwenye menu ya mtandao husika</li>
+                                                            <li>Chagua 4 (lipa Bili)</li>
+                                                            <li>Chagua 5 (Malipo ya Serikali)</li>
+                                                            <li>
+                                                                Ingiza <b>{{ bill?.controlNumber }}</b> kama nambari ya
+                                                                kumbukumbu
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5><b>How to Pay</b></h5>
+                                                <ol>
+                                                    <li>
+                                                        Via Bank: Visit any Branch or Bank agent of CRDB, NMB, BOT.
+                                                        Reference Number is <b>{{ bill?.controlNumber }}</b>
+                                                    </li>
+                                                    <li>
+                                                        Via Mobile Network Operators (MNOs)
+                                                        <ul>
+                                                            <li>Enter to the respective USSD menu of MNO</li>
+                                                            <li>Select 4 (Make Payment)</li>
+                                                            <li>Select 5 (Government Payment)</li>
+                                                            <li>Enter <b>{{ bill?.controlNumber }}</b> as reference
+                                                                number
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 text-center">
+                                            <p>
+                                                Council Revenue Collection &copy; {{ today | date: "yyyy" }} All
+                                                Rights Reserved .
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button class="btn-primary  text-white" mat-raised-button ngxPrint color="primary"
+                                (click)="printDiv('printingAreaDiv')" printSectionId="printingAreaDiv">
+                                <mat-icon>print</mat-icon>
+                                <span>Print</span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,83 @@
+<header id="page-topbar" data-scroll-header (window:scroll)="windowScroll()">
+  <div class="layout-width">
+    <div class="navbar-header">
+      <div class="d-flex">
+        <!-- LOGO -->
+        <div class="navbar-brand-box horizontal-logo">
+          <a href="javascript:void(0);" class="logo logo-dark">
+            <span class="logo-sm">
+              <!-- <img src="assets/images/logo-sm.png" alt="" height="22"> -->
+            </span>
+            <span class="logo-lg">
+              <!-- <img src="assets/images/logo-dark.png" alt="" height="17"> -->
+            </span>
+          </a>
+
+          <a href="javascript:void(0);" class="logo logo-light">
+            <span class="logo-sm">
+              <!-- <img src="assets/images/logo-sm.png" alt="" height="22"> -->
+            </span>
+            <span class="logo-lg">
+              <!-- <img src="assets/images/logo-light.png" alt="" height="17"> -->
+            </span>
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+          id="topnav-hamburger-icon"
+          (click)="toggleMobileMenu($event)"
+        >
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown" (click)="toggleDropdown($event)" [class.show]="isDropdownOpen" style="position: relative;">
+        <div
+          id="profileDropdown"
+          class="dropdown-toggle d-flex align-items-center p-2 justify-content-between"
+          [attr.aria-expanded]="isDropdownOpen"
+          style="cursor: pointer; width: 100%;"
+        >
+          <div class="d-flex align-items-center">
+            <div class="user-info text-start ms-xl-2">
+              <div class="user-name fw-medium">
+                {{ userData?.firstName }} {{ userData?.lastName }}
+              </div>
+              <div class="user-email text-muted fs-12" style="padding-right: 1px;">
+                {{ userData?.email }}
+              </div>
+            </div>
+          </div>
+          <i class="ri-arrow-down-s-fill" style="font-size:30px; color:rgb(50, 50, 117);padding-top: 10px;"></i>
+          <i
+            class="fa"
+            [ngClass]="{'fa-chevron-down': !isDropdownOpen, 'fa-chevron-up': isDropdownOpen}"
+            aria-hidden="true"
+            style="padding-left: 10px;"
+          ></i>
+        </div>
+        <div *ngIf="isDropdownOpen" class="dropdown-menu dropdown-menu-right show" aria-labelledby="profileDropdown">
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" (click)="changePassword('change')">
+                <i class="ri-lock-password-line me-2" style="color:darkkhaki"></i>
+                Change Password
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" (click)="logout()">
+                <i class="mdi mdi-logout text-white-muted me-2" style="color:darkkhaki"></i>
+                Log Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

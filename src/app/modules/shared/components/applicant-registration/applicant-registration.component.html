@@ -1,0 +1,215 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="header-title">
+        <h2 mat-dialog-title>{{ title }}</h2>
+        <button type="button" class="btn-close btn-close-white ms-auto"
+            style="float: right; font-size: 1rem; padding-top: 20px" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+</div>
+<mat-dialog-content>
+    <div class="card-body pt-3">
+        <form [formGroup]="registrationForm" autocomplete="off">
+            <div class="row p-1 ml-2">
+                <div class="col-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Applicant Type</mat-label>
+                        <mat-select formControlName="applicantTypeId" placeholder="Applicant Type">
+                            <mat-option [value]="app.setupUUID" *ngFor="let app of applicantTypes"
+                                (click)="selectedOption(app)">
+                                {{app.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <!--                          
+                        </div>
+                        <div class="row p-1"> -->
+                <div class="col-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>ID Type</mat-label>
+                        <mat-select formControlName="identificationCardTypeId" placeholder="Applicant Type">
+                            <mat-option *ngFor="let id of idTypes" (click)="onIdChange(id)" [value]="id.setupUUID">
+                                {{id.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-4" *ngIf="name">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Id Number</mat-label>
+                        <input matInput formControlName="idNumber" type="text" (input)="formatNida($event)"
+                            pattern="^\d{8}-\d{5}-\d{5}-\d{2}$" maxlength="23" placeholder="IdCard Number">
+                        <mat-error>This is a required field!</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4" *ngIf="!name">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Id Number</mat-label>
+                        <input matInput type="text" (input)="formatTin($event)" formControlName="idNumber" placeholder="Id Number">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-12 p-1" *ngIf="actor === 'COMPANY'">
+                <mat-form-field appearance="outline">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput type="text" formControlName="companyName" placeholder="Company Name">
+                    <mat-error>This field is required!</mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="row p-1" *ngIf="actor === 'INDIVIDUAL'">
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput type="text" formControlName="firstName" placeholder="First Name">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Middle Name</mat-label>
+                        <input matInput type="text" formControlName="middleName" placeholder="Midlle Name">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput type="text" formControlName="lastName" placeholder="Last Name">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+         <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sex</mat-label>
+                        <mat-select formControlName="sex" placeholder="Sex">
+                            <mat-option *ngFor="let sex of sex" [value]="sex.value">
+                                {{sex.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="row p-1" *ngIf="actor === 'INDIVIDUAL'">
+
+            </div>
+            <div class="row p-1">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput formControlName="mobileNumber" type="text" placeholder="Phone Number"
+                            (input)="formatPhoneNumber($event)" required pattern="^255\d{9}$" maxlength="12" />
+                        <mat-error *ngIf="
+                registrationForm.get('mobileNumber').invalid &&
+                (registrationForm.get('mobileNumber').dirty ||
+                  registrationForm.get('mobileNumber').touched)
+              ">
+                            <span *ngIf="registrationForm.get('mobileNumber').errors['required']">This is required
+                                field!</span>
+                            <span *ngIf="registrationForm.get('mobileNumber').errors['pattern']">Start with 255..& valid
+                                format.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input matInput type="text" formControlName="address" placeholder="Eg. S.L.P 500, DODOMA">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Region</mat-label>
+                        <mat-select formControlName="regionId" placeholder="Region">
+                            <mat-option *ngFor="let region of regions" (click)="onChange(region)" [value]="region.uuid">
+                                {{region.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Council</mat-label>
+                        <mat-select formControlName="councilCode" placeholder="Council">
+                            <mat-option *ngFor="let council of councils" (click)="onChangeCouncil(council)"
+                                [value]="council.uuid">
+                                {{council.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ward</mat-label>
+                        <mat-select formControlName="wardCode" placeholder="Ward">
+                            <mat-option *ngFor="let ward of wards" (click)="onChangeWard(ward)" [value]="ward.uuid">
+                                {{ward.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Street</mat-label>
+                        <mat-select formControlName="streetId" placeholder="Street">
+                            <mat-option *ngFor="let street of streets" [value]="street.streetCode">
+                                {{street.streetName}}</mat-option>
+                        </mat-select>
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput type="text" formControlName="email" placeholder="eg. jeee@info.com">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+                </div>
+             <div class="col-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password" placeholder="Password">
+                        <mat-error>Must include lettters,numbers and special charactor not less than 8!</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput type="password" formControlName="confirmPassword" placeholder="confirmPassword">
+                        <mat-error>This field is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+            </div>
+       
+        </form>
+        <div class="row right">
+            <button class="form-button" type="submit" mat-raised-button mat-fab extended color="primary"
+                (click)="saveApplicant(registrationForm.value)" [disabled]="registrationForm.invalid">
+                <mat-icon>save</mat-icon>
+                <span class="text-button"> Save </span>
+            </button>
+        </div>
+    </div>
+</mat-dialog-content>

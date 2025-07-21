@@ -1,0 +1,384 @@
+
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg navbar-landing fixed-top bg-tran" id="navbar" >
+        <div class="container">
+            <a class="navbar-brand" routerLink="/">
+                <!--  -->
+                <img src="assets/images/emblem.png" class="card-logo card-logo-dark" alt="logo dark" height="60">
+            </a>
+            <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" (click)="toggleMenu()">
+                <i class="ri-menu-line"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="mx-auto"></div>
+                <a routerLink="/faqs" class="btn btn-link fw-medium text-decoration-none">FAQS</a>
+                <a routerLink="/aboutus" class="btn btn-link fw-medium text-decoration-none">About us</a>
+                <div class="mx-auto"></div>
+                <div class="">
+                    <a class="navbar-brand" routerLink="/">
+                        <!-- <h4 class="fw-bold text-white">dides</h4> -->
+                        <img src="assets/images/logo.png" class="card-logo2 card-logo-dark mt-3" alt="logo dark"
+                            height="60">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+        <div class="profile-foreground position-relative mx-n4 mt-n4">
+            <div class="profile-wid-bg">
+                <img src="assets/images/money.jpg" alt="" class="profile-wid-img" />
+            </div>
+
+        </div>
+       
+
+    <section class="section nft-hero" id="hero"> 
+             <div class="container">
+             <div class="separator2">
+                    <h5><b>Steps for Payments</b></h5>
+             </div>
+                <div class="row">
+                    <div class="col-12 col-md-1"></div>
+                    <div class="col-12 col-md-5" *ngFor="let card of stepsData">
+                        <div class="disco-card card-animate" >
+                            <div class="disco-title"><b>{{ card.head }}</b></div>
+                            <div class="disco-body">
+                                <div class="disco-icon">
+                                    <i class="bx {{ card.icon }} fs-35"></i>
+                                </div>
+                                <div class="text-start">{{ card.description }} 🠫</div>
+                            </div>
+                            <br />
+                            <div class="row d-flex align-items-center">
+                              <div class="col-md-4"></div>
+                              <div class="col-md-6">
+                                <button  class="btn btn-primary" (click)="openEnd(filtetcontent, card.head)"
+                                *ngIf="card.head === 'CHECK OUTSTANDING'">CHECK BILLS</button>
+                                <button  class="btn btn-primary" (click)="openEnd(filtetcontent, card.head)"
+                                *ngIf="card.head !== 'CHECK OUTSTANDING'">MAKE PAYMENT</button>
+                              </div>
+                              </div>
+                            <div class="disco-dancer disco-two">
+                                <div class="lt"></div>
+                                <div class="lb"></div>
+                                <div>{{ card.stepnumber }}</div>
+                                <div>STEP</div>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-12 col-md-1"></div>           
+                </div>
+             </div>
+             <br /> <br />
+             <div class="row">
+                <div class="row p-3">
+                    <div class="table-responsive table-card">
+                      <table class="table table-centered table-hover align-middle table-nowrap mb-0">
+                        <tbody>
+                          <tr class="header">
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>SN</h6>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>CONTROL NUMBER</h6>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>DATE</h6>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>BILL AMOUNT</h6>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>PAID AMOUNT</h6>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <h6>ACTION</h6>
+                              </div>
+                            </td>
+                          </tr>
+                          @for ( data of bills; track $index) {
+                          <tr>
+      
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                {{$index+1}}
+                              </div>
+      
+                            </td>
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                {{data.controlNumber}}
+                              </div>
+                            </td>
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                {{data.createdDate | date: 'dd/MM/yyyy'}}
+                              </div>
+                            </td>
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                {{data.billAmount | number}} - {{data.currencyCode}}
+                              </div>
+                            </td>
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                {{data.paidAmount | number}} - {{data.currencyCode}}
+                              </div>
+                            </td>
+                            <td class="mb-3">
+                              <div class="d-flex align-items-center">
+                                <button type="button" class="btn btn-soft-primary btn-sm" (click)="openEnd(filtetcontent, 'MAKE PAYMENTS')">pay
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          }
+                          <tr *ngIf="bills.length === 0">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                            <div class="d-flex align-items-center">
+                              <p class="text-center">---No Bills Found---</p>
+                            </div>
+                          </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+             </div>
+            
+        <!-- end container -->
+    </section>
+</div>
+
+  
+<ng-template #filtetcontent let-offcanvas>
+    <div class="d-flex align-items-center bg-primary bg-gradient p-3 offcanvas-header">
+        <h5 class="m-0 me-2 text-white">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white ms-auto " data-bs-dismiss="offcanvas" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <div class="auth-page-content">
+           <div class="container">
+            <div class="text-center mt-sm-5 mb-4 text-white-50">
+                <div>
+                    <a href="javascript:void(0);" class="d-inline-block auth-logo">
+                        <img src="../../../../../assets/images/logo.png" alt="" height="80" widit="auto">
+                    </a>
+            </div>
+           </div> 
+           <div class="row d-flex justify-content-center">
+        
+            <form [formGroup]="loginForm" *ngIf="title === 'CHECK OUTSTANDING'">
+              <div class="row p-3">
+                  <div class="col-6">
+                      <div class="form-check px-2">
+                          <input class="form-check-input" type="radio" name="checkActor" [id]=10 [checked]="false" (change)="selectedValue('parking')">
+                          <label class="form-check-label" for="10">Parking Bills</label>
+                        </div>
+                  </div>
+                  <div class="col-6">
+                      <div class="form-check px-1">
+                          <input class="form-check-input" type="radio" name="checkActor" [id]=9  (change)="selectedValue('otherApp')">
+                          <label class="form-check-label" for="9">Other Applications</label>
+                        </div>
+                  </div>
+              </div>
+                <label for="designationfloatingInput" class="required"  *ngIf="billApp === 'otherApp' || billApp === 'parking' ">Check Your Bill via ?</label>
+                <div class="row p-3" >
+                    <div class="col-6" *ngIf="billApp === 'parking'">
+                        <div class="form-check px-1">
+                            <input class="form-check-input" type="radio" name="checkActor" [id]=8 [checked]="false" (change)="showForm('parking')">
+                            <label class="form-check-label" for="8">Plate Number</label>
+                          </div>
+                    </div>
+                    <div class="col-6" *ngIf="billApp === 'otherApp'">
+                      <div class="form-check px-1">
+                          <input class="form-check-input" type="radio" name="checkActor" [id]=7 [checked]="false" (change)="showForm('otherApp')">
+                          <label class="form-check-label" for="7">Payer Name</label>
+                        </div>
+                  </div>
+                    <div class="col-6" *ngIf="billApp === 'otherApp' || billApp === 'parking' ">
+                        <div class="form-check px-1">
+                            <input class="form-check-input" type="radio" name="checkActor" [id]=12  (change)="showForm('controlNumber')">
+                            <label class="form-check-label" for="12">Control Number</label>
+                          </div>
+                    </div>
+                </div>
+                <div class="mb-1"  *ngIf="form === 'parking'">
+                  <label class="form-label" for="plateNumber">Plate Number</label>
+                  <input type="plateNumber" class="form-control" id="plateNumber" formControlName="plateNumber"
+                      [ngClass]="{ 'is-invalid': submitted && f['plateNumber'].errors }" placeholder="Plate Number">
+                  @if (submitted && f['plateNumber'].errors) {
+                  <div class="invalid-feedback">
+                      @if(f['plateNumber'].errors['required']){
+                      <div>Plate Number is required</div>}
+                      @if(f['plateNumber'].errors['plateNumber']){
+                      <div>Error..
+                      </div>
+                      }
+                  </div>
+                  }
+              </div>
+
+              <div class="mb-1" *ngIf="form === 'otherApp'">
+                <label class="form-label" for="plateNumber">Payer Name</label>
+                <input type="plateNumber" class="form-control" id="plateNumber" formControlName="plateNumber"
+                    [ngClass]="{ 'is-invalid': submitted && f['plateNumber'].errors }" placeholder="Payer Name">
+                @if (submitted && f['plateNumber'].errors) {
+                <div class="invalid-feedback">
+                    @if(f['plateNumber'].errors['required']){
+                    <div>Payer Name is required</div>}
+                    @if(f['plateNumber'].errors['plateNumber']){
+                    <div>Error..
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+              
+              <div class="mb-1"  *ngIf="form === 'controlNumber'">
+                <label class="form-label" for="controlNumber">Plate Number</label>
+                <input type="controlNumber" class="form-control" id="controlNumber" formControlName="controlNumber"
+                    [ngClass]="{ 'is-invalid': submitted && f['plateNumber'].errors }" placeholder="Control Number">
+                @if (submitted && f['controlNumber'].errors) {
+                <div class="invalid-feedback">
+                    @if(f['controlNumber'].errors['required']){
+                    <div>Control Nmber is required</div>}
+                    @if(f['controlNumber'].errors['controlNumber']){
+                    <div>Error..
+                    </div>
+                    }
+                </div>
+                }
+            </div>   
+            
+               
+                <div class="row">
+                    <div class="mt-4">
+                        <button [disabled]="loginForm.invalid" (click)="searchData(loginForm.value)" class="btn btn-primary w-100" type="submit">Check Bills</button>
+                    </div>
+                </div>
+                </form>
+         
+                <form [formGroup]="paymentForm" *ngIf="title === 'MAKE PAYMENTS'">
+                  <div class="row p-3">
+                    <div class="col-6">
+                        <div class="form-check px-2">
+                            <input class="form-check-input" type="radio" name="checkActor" [id]=10 [checked]="false" (change)="selectedValue('parking')">
+                            <label class="form-check-label" for="10">Parking Payments</label>
+                          </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check px-1">
+                            <input class="form-check-input" type="radio" name="checkActor" [id]=19  (change)="selectedValue('otherApp')">
+                            <label class="form-check-label" for="19">Other Payments</label>
+                          </div>
+                    </div>
+                </div>
+                    <label for="designationfloatingInput" class="required" *ngIf="billApp === 'parking'">Make Payment using ?</label>
+
+                    <div class="row p-2">
+                        <div class="col-6" *ngIf="billApp === 'parking'">
+                            <div class="form-check px-1">
+                                <input class="form-check-input" type="radio" name="checkActor" [id]=13 [checked]="false" (change)="showForm2('plateNumber')">
+                                <label class="form-check-label" for="13">Plate Number</label>
+                              </div>
+                        </div>
+                        <div class="col-6" *ngIf="billApp === 'otherApp'">
+                          <div class="form-check px-1">
+                              <input class="form-check-input" type="radio" name="checkActor" [id]=18 [checked]="false" (change)="showForm2('payerName')">
+                              <label class="form-check-label" for="18">Payer Name</label>
+                            </div>
+                      </div>
+                        <div class="col-6" *ngIf="billApp === 'parking' || billApp === 'otherApp'">
+                            <div class="form-check px-1">
+                                <input class="form-check-input" type="radio" name="checkActor" [id]=29  (change)="showForm2('controlNumber')">
+                                <label class="form-check-label" for="29">Control Number</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="form-floating" *ngIf="formPayment === 'plateNumber'">
+                            <input type="text" class="form-control" id="plateNumber" formControlName="plateNumber" placeholder="Enter Plate Number">
+                            <label for="plateNumber" class="required">Plate Number</label>
+                        </div>
+                        <div class="form-floating" *ngIf="formPayment === 'payerName'">
+                          <input type="text" class="form-control" id="designationfloatingInput" formControlName="plateNumber" placeholder="Enter Payer Name">
+                          <label for="designationfloatingInput" class="required">Payer Name</label>
+                      </div>
+                        <div class="form-floating" *ngIf="formPayment === 'controlNumber'">
+                            <input type="text" class="form-control" id="designationfloatingInput" formControlName="controlNumber" placeholder="Control Number">
+                            <label for="designationfloatingInput" class="required">Control Number</label>
+                        </div>
+                    </div> 
+                    <div class="row p-2" *ngIf="formPayment === 'plateNumber' || formPayment === 'controlNumber' || formPayment === 'payerName'">
+                      <div class="col-3">
+                          <div class="form-check px-1">
+                              <input class="form-check-input" type="radio" name="checkActor" value="PSP003" [id]=144 formControlName="pspCode" [checked]="false" (change)="selectedMobile('Airtel')">
+                              <label for="144"><img src="../../../../../assets/images/airtel_pesa.png"  alt="" class="avatar-xs rounded-circle" /></label>
+                            </div>
+                      </div>
+                      <div class="col-3">
+                          <div class="form-check px-1">
+                              <input class="form-check-input" type="radio" name="checkActor" value="PSP002" [id]=132 formControlName="pspCode" [checked]="false" (change)="selectedMobile('Vodacom')">
+                             <label for="132"> <img src="../../../../../assets/images/voda_pesa.png" alt="" class="avatar-xs rounded-circle" /></label>
+                            </div>
+                      </div>
+                      <div class="col-3">
+                          <div class="form-check px-1">
+                              <input class="form-check-input" type="radio" name="checkActor" formControlName="pspCode" value="PSP001" [id]=123 [checked]="false" (change)="selectedMobile('Tigo')">
+                             <label for="123"><img src="../../../../../assets/images/tigo_pesa.png" alt="" class="avatar-xs rounded-circle" /></label>
+                            </div>
+                      </div>
+                      <div class="col-3">
+                          <div class="form-check px-1">
+                              <input class="form-check-input" type="radio" formControlName="pspCode" name="checkActor" value="PSP004" [id]=112 [checked]="false" (change)="selectedMobile('Halotel')">
+                              <label for="112"><img src="../../../../../assets/images/halo_pesa.png" alt="" class="avatar-xs rounded-circle" /></label>
+                            </div>
+                      </div>
+                  </div>
+                    <div class="row p-2" *ngIf="formPayment === 'plateNumber' || formPayment === 'controlNumber' || formPayment === 'payerName'">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter {{phoneName}} Number">
+                            <label for="phoneNumber" class="required">{{phoneName}} Number</label>
+                        </div>
+                    </div>
+                  
+                    <div class="row p-2" *ngIf="formPayment === 'plateNumber' || formPayment === 'controlNumber' || formPayment === 'payerName'">
+                      <div class="form-floating">
+                          <input type="number" class="form-control" id="amount" formControlName="amount" placeholder="Enter Amount">
+                          <label for="amount" class="required">Amount</label>
+                      </div>
+                  </div>
+                    <div class="row">
+                        <div class="mt-4">
+                            <button [disabled]="paymentForm.invalid" (click)="pushPayment(paymentForm.value)" class="btn btn-primary w-100" type="submit">MAKE PAYMENT</button>
+                        </div>
+                    </div>
+                  
+                    </form>
+        </div>
+            
+        </div>
+        </div>
+    </div>
+</ng-template>

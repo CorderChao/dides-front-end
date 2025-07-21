@@ -1,0 +1,121 @@
+<div class="col-xxl-6">
+    <h5 class="mb-3">Custom Navvvv</h5>
+    <div class="card">
+        <div class="card-body">
+            <p class="text-muted">*Use <code>nav-custom-</code> class with modifier class to color tabs.</p>
+            <!-- Nav tabs -->
+            <ul ngbNav #ModifierCustom="ngbNav" [activeId]="1" class="nav nav-pills nav-customs nav-danger mb-3">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink class="nav-link">
+                      Home
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                Raw denim you probably haven't heard of them jean shorts Austin.
+                                Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+                            </div>
+                        </div>
+                        <div class="d-flex mt-2">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                Too much or too little spacing, as in the example below, can make things unpleasant for the
+                                reader. The
+                                goal is to make your text as comfortable to read as possible.
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink class="nav-link">
+                      Profile
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                In some designs, you might adjust your tracking to create a certain artistic effect. It can
+                                also help
+                                you fix fonts that are poorly spaced to begin with.
+                            </div>
+                        </div>
+                        <div class="d-flex mt-2">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                A wonderful serenity has taken possession of my entire soul, like these sweet mornings of
+                                spring which I
+                                enjoy with my whole heart.
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                    <a ngbNavLink class="nav-link">
+                      Messages
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                Each design is a new, unique piece of art birthed into this world, and while you have the
+                                opportunity to
+                                be creative and make your own style choices.
+                            </div>
+                        </div>
+                        <div class="d-flex mt-2">
+                            <div class="flex-shrink-0">
+                                <i class="ri-checkbox-circle-fill text-success"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                For that very reason, I went on a quest and spoke to many different professional graphic
+                                designers and
+                                asked them what graphic design tips they live.
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="4">
+                  <a ngbNavLink class="nav-link">
+                    Settings
+                  </a>
+                  <ng-template ngbNavContent>
+                    <div class="d-flex mt-2">
+                        <div class="flex-shrink-0">
+                            <i class="ri-checkbox-circle-fill text-success"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-2">
+                            For that very reason, I went on a quest and spoke to many different professional graphic
+                            designers and
+                            asked them what graphic design tips they live.
+                        </div>
+                    </div>
+                    <div class="d-flex mt-2">
+                        <div class="flex-shrink-0">
+                            <i class="ri-checkbox-circle-fill text-success"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-2">
+                            After gathering lots of different opinions and graphic design basics, I came up with a list
+                            of 30
+                            graphic design tips that you can start implementing.
+                        </div>
+                    </div>
+                  </ng-template>
+                </li>
+            </ul>
+            <div class="tab-content text-muted">
+                <div [ngbNavOutlet]="ModifierCustom"></div>
+            </div>
+        </div><!-- end card-body -->
+    </div>
+</div><!--end col-->

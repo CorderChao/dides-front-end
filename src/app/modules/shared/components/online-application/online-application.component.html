@@ -1,0 +1,646 @@
+<div class="container">
+
+    <div class="header" style="background: linear-gradient(135deg, lightblue 82%, 51%, white 100%); color: white; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+  
+  <!-- Left Logo -->
+  <div style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%);">
+    <img src="../../../../../assets/images/emblem.png" alt="Left Logo" style="height: 80px; width: auto; border-radius: 50%; ">
+  </div>
+  
+  <!-- Right Logo -->
+  <div style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+    <img src="../../../../../assets/images/logo.png" alt="Right Logo" style="height: 100px; width: auto; border-radius: 50%; border: 2px solid white;">
+  </div>
+  
+  <!-- Header Content -->
+  <div style="margin: 0 120px;">
+    <h2 class="text-center mb-4" style="margin: 0; font-size: 1.8em; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">DODOMA INSTITUTE OF DEVELOPMENT AND ENTREPRENEURSHIP STUDIES</h2>
+    <h4 class="text-center mb-4" style="margin: 10px 0 0; font-size: 1.2em; font-weight: 500;">Application Form for Admission into Certificate and Diploma Courses for Academic Year 2025/2026</h4>
+  </div>
+  
+  <!-- Decorative Elements -->
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);"></div>
+</div>
+
+  <!-- Stepper Progress -->
+  <div class="stepper mb-5">
+    <div class="stepper-header">
+      <div class="stepper-item" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+        <div class="stepper-number">1</div>
+        <div class="stepper-title">Personal Info</div>
+      </div>
+      <div class="stepper-item" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+        <div class="stepper-number">2</div>
+        <div class="stepper-title">Next of Kin</div>
+      </div>
+      <div class="stepper-item" [class.active]="currentStep === 3" [class.completed]="currentStep > 3">
+        <div class="stepper-number">3</div>
+        <div class="stepper-title">Courses</div>
+      </div>
+      <div class="stepper-item" [class.active]="currentStep === 4" [class.completed]="currentStep > 4">
+        <div class="stepper-number">4</div>
+        <div class="stepper-title">Education</div>
+      </div>
+      <div class="stepper-item" [class.active]="currentStep === 5" [class.completed]="currentStep > 5">
+        <div class="stepper-number">5</div>
+        <div class="stepper-title">Sponsorship</div>
+      </div>
+      <div class="stepper-item" [class.active]="currentStep === 6">
+        <div class="stepper-number">6</div>
+        <div class="stepper-title">Declaration</div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+    <!-- Step 1: Personal Information -->
+    <div class="step" *ngIf="currentStep === 1">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>1. Personal Information (Please use capital letters)</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastName" class="required-field">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="personalInfo.lastName" required>
+                <div *ngIf="applicationForm.get('personalInfo.lastName')?.invalid && 
+                            applicationForm.get('personalInfo.lastName')?.touched" class="invalid-feedback">
+                  Last name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Do you have any Physical or Communication Disabilities?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="personalInfo.hasDisability" [value]="true">
+                  <label class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="personalInfo.hasDisability" [value]="false">
+                  <label class="form-check-label">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="firstName" class="required-field">First Name and Middle Name(s)</label>
+            <input type="text" class="form-control" id="firstName" formControlName="personalInfo.firstName" required>
+            <div *ngIf="applicationForm.get('personalInfo.firstName')?.invalid && 
+                        applicationForm.get('personalInfo.firstName')?.touched" class="invalid-feedback">
+              First name is required
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="dateOfBirth" class="required-field">Date of Birth</label>
+                <input type="date" class="form-control" id="dateOfBirth" formControlName="personalInfo.dateOfBirth" required>
+                <div *ngIf="applicationForm.get('personalInfo.dateOfBirth')?.invalid && 
+                            applicationForm.get('personalInfo.dateOfBirth')?.touched" class="invalid-feedback">
+                  Date of birth is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="required-field">Sex</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="personalInfo.sex" value="Male" required>
+                  <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="personalInfo.sex" value="Female" required>
+                  <label class="form-check-label">Female</label>
+                </div>
+                <div *ngIf="applicationForm.get('personalInfo.sex')?.invalid && 
+                            applicationForm.get('personalInfo.sex')?.touched" class="invalid-feedback">
+                  Please select your sex
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="placeOfBirth" class="required-field">Place of Birth</label>
+                <input type="text" class="form-control" id="placeOfBirth" formControlName="personalInfo.placeOfBirth" required>
+                <div *ngIf="applicationForm.get('personalInfo.placeOfBirth')?.invalid && 
+                            applicationForm.get('personalInfo.placeOfBirth')?.touched" class="invalid-feedback">
+                  Place of birth is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="applicationForm.get('personalInfo.hasDisability')?.value" class="form-group">
+            <label>If YES above tick whichever is applicable</label>
+            <div class="row">
+              <div class="col-md-2" *ngFor="let disability of disabilities">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [value]="disability.name" 
+                         (change)="onDisabilityChange($event, disability.name)">
+                  <label class="form-check-label">{{disability.name}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label for="disabilityDetails">Give details of disability</label>
+              <textarea class="form-control" id="disabilityDetails" formControlName="personalInfo.disabilityDetails"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="citizenship" class="required-field">Citizenship</label>
+                <input type="text" class="form-control" id="citizenship" formControlName="personalInfo.citizenship" required>
+                <div *ngIf="applicationForm.get('personalInfo.citizenship')?.invalid && 
+                            applicationForm.get('personalInfo.citizenship')?.touched" class="invalid-feedback">
+                  Citizenship is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="maritalStatus">Marital Status</label>
+                <select class="form-control" id="maritalStatus" formControlName="personalInfo.maritalStatus">
+                  <option value="">Select marital status</option>
+                  <option *ngFor="let status of maritalStatuses" [value]="status.name">{{status.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="permanentAddress" class="required-field">Permanent Home Address</label>
+            <input type="text" class="form-control" id="permanentAddress" formControlName="personalInfo.permanentAddress" required>
+            <div *ngIf="applicationForm.get('personalInfo.permanentAddress')?.invalid && 
+                        applicationForm.get('personalInfo.permanentAddress')?.touched" class="invalid-feedback">
+              Permanent address is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contactAddress" class="required-field">Contact Address</label>
+            <input type="text" class="form-control" id="contactAddress" formControlName="personalInfo.contactAddress" required>
+            <div *ngIf="applicationForm.get('personalInfo.contactAddress')?.invalid && 
+                        applicationForm.get('personalInfo.contactAddress')?.touched" class="invalid-feedback">
+              Contact address is required
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email" class="required-field">Email Address</label>
+                <input type="email" class="form-control" id="email" formControlName="personalInfo.email" required>
+                <div *ngIf="applicationForm.get('personalInfo.email')?.invalid && 
+                            applicationForm.get('personalInfo.email')?.touched" class="invalid-feedback">
+                  Valid email is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="mobile" class="required-field">Mobile Number</label>
+                <input type="tel" class="form-control" id="mobile" formControlName="personalInfo.mobile" required>
+                <div *ngIf="applicationForm.get('personalInfo.mobile')?.invalid && 
+                            applicationForm.get('personalInfo.mobile')?.touched" class="invalid-feedback">
+                  Mobile number is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="required-field">Please select residence category</label>
+            <div *ngFor="let residence of residenceCategories" class="form-check">
+              <input class="form-check-input" type="radio" formControlName="personalInfo.residenceCategory" [value]="residence.name" required>
+              <label class="form-check-label">{{residence.name}}</label>
+            </div>
+            <div *ngIf="applicationForm.get('personalInfo.residenceCategory')?.invalid && 
+                        applicationForm.get('personalInfo.residenceCategory')?.touched" class="invalid-feedback">
+              Residence category is required
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" disabled>Previous</button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Next of Kin -->
+    <div class="step" *ngIf="currentStep === 2">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Next of Kin</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nextOfKinName" class="required-field">Name</label>
+                <input type="text" class="form-control" id="nextOfKinName" formControlName="nextOfKin.name" required>
+                <div *ngIf="applicationForm.get('nextOfKin.name')?.invalid && 
+                            applicationForm.get('nextOfKin.name')?.touched" class="invalid-feedback">
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nextOfKinMobile" class="required-field">Mobile Number</label>
+                <input type="tel" class="form-control" id="nextOfKinMobile" formControlName="nextOfKin.mobile" required>
+                <div *ngIf="applicationForm.get('nextOfKin.mobile')?.invalid && 
+                            applicationForm.get('nextOfKin.mobile')?.touched" class="invalid-feedback">
+                  Mobile number is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nextOfKinRelationship" class="required-field">Relationship</label>
+                <input type="text" class="form-control" id="nextOfKinRelationship" formControlName="nextOfKin.relationship" required>
+                <div *ngIf="applicationForm.get('nextOfKin.relationship')?.invalid && 
+                            applicationForm.get('nextOfKin.relationship')?.touched" class="invalid-feedback">
+                  Relationship is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nextOfKinResidence" class="required-field">Residence</label>
+                <input type="text" class="form-control" id="nextOfKinResidence" formControlName="nextOfKin.residence" required>
+                <div *ngIf="applicationForm.get('nextOfKin.residence')?.invalid && 
+                            applicationForm.get('nextOfKin.residence')?.touched" class="invalid-feedback">
+                  Residence is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Course Selection -->
+    <div class="step" *ngIf="currentStep === 3">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Type of Application for Certificate and Diploma courses</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Course Offered</th>
+                <th>Tick (√) the appropriate field</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of courses">
+                <td>{{course.id}}</td>
+                <td>{{course.name}}</td>
+                <td>
+                  <input type="checkbox" [value]="course.id" (change)="onCourseChange($event, course.id)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Type of Application for VETA courses</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Course Offered</th>
+                <th>Nature of the course</th>
+                <th>Tick (√) the appropriate field</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of vetaCourses">
+                <td>{{course.id}}</td>
+                <td>{{course.name}}</td>
+                <td>{{course.nature}}</td>
+                <td>
+                  <input type="checkbox" [value]="course.id" (change)="onVetaCourseChange($event, course.id)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>OFFER: The following short courses will be offered freely</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Course Offered</th>
+                <th>Tick (√) the appropriate field</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of freeCourses">
+                <td>{{course.id}}</td>
+                <td>{{course.name}}</td>
+                <td>
+                  <input type="checkbox" [value]="course.id" (change)="onFreeCourseChange($event, course.id)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Education Background -->
+    <div class="step" *ngIf="currentStep === 4">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>3. Education Background</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <h6>a) Certificate of Primary Education Examination (CPEE)</h6>
+            <div class="row">
+              <div class="col-md-3">
+                <label>From</label>
+                <input type="text" class="form-control" formControlName="educationBackground.primarySchool.fromYear">
+              </div>
+              <div class="col-md-3">
+                <label>To</label>
+                <input type="text" class="form-control" formControlName="educationBackground.primarySchool.toYear">
+              </div>
+              <div class="col-md-3">
+                <label>Examination Authority</label>
+                <input type="text" class="form-control" formControlName="educationBackground.primarySchool.authority">
+              </div>
+              <div class="col-md-3">
+                <label>School Name</label>
+                <input type="text" class="form-control" formControlName="educationBackground.primarySchool.schoolName">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <label>Country</label>
+                <input type="text" class="form-control" formControlName="educationBackground.primarySchool.country">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <h6>b) Certificate of Secondary Education Examination (C.S.E.E) or Equivalent</h6>
+            <div class="row">
+              <div class="col-md-3">
+                <label>From</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.fromYear">
+              </div>
+              <div class="col-md-3">
+                <label>To</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.toYear">
+              </div>
+              <div class="col-md-3">
+                <label>Index Number</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.indexNumber">
+              </div>
+              <div class="col-md-3">
+                <label>Examination Authority</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.authority">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <label>Division</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.division">
+              </div>
+              <div class="col-md-3">
+                <label>Examination Centre/School</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.schoolName">
+              </div>
+              <div class="col-md-3">
+                <label>Country</label>
+                <input type="text" class="form-control" formControlName="educationBackground.secondarySchool.country">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <h6>c) Advanced Certificate of Secondary Education Examination (A.C.S.E.E.) or Equivalent</h6>
+            <div class="row">
+              <div class="col-md-3">
+                <label>From</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.fromYear">
+              </div>
+              <div class="col-md-3">
+                <label>To</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.toYear">
+              </div>
+              <div class="col-md-3">
+                <label>Index Number</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.indexNumber">
+              </div>
+              <div class="col-md-3">
+                <label>Examination Authority</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.authority">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <label>Division</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.division">
+              </div>
+              <div class="col-md-3">
+                <label>Examination Center/School</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.schoolName">
+              </div>
+              <div class="col-md-3">
+                <label>Country</label>
+                <input type="text" class="form-control" formControlName="educationBackground.advancedEducation.country">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <h6>d) Details of Any Other Qualifications</h6>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-3" (click)="addQualification()">
+              Add Qualification
+            </button>
+            
+            <div *ngFor="let qual of otherQualifications.controls; let i = index" class="qualification-item mb-3 p-3 border">
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Institute/Institution</label>
+                  <input type="text" class="form-control" [formControlName]="i + '.institute'">
+                </div>
+                <div class="col-md-2">
+                  <label>From (Year)</label>
+                  <input type="text" class="form-control" [formControlName]="i + '.fromYear'">
+                </div>
+                <div class="col-md-2">
+                  <label>To (Year)</label>
+                  <input type="text" class="form-control" [formControlName]="i + '.toYear'">
+                </div>
+                <div class="col-md-3">
+                  <label>Name of award</label>
+                  <input type="text" class="form-control" [formControlName]="i + '.award'">
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                  <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeQualification(i)">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Sponsorship -->
+    <div class="step" *ngIf="currentStep === 5">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>4. Sponsorship Declaration</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="required-field">Sponsorship - Please select one</label>
+            <div *ngFor="let type of sponsorshipTypes" class="form-check">
+              <input class="form-check-input" type="radio" formControlName="sponsorship.type" [value]="type.name" required>
+              <label class="form-check-label">{{type.name}}</label>
+            </div>
+            <div *ngIf="applicationForm.get('sponsorship.type')?.invalid && 
+                        applicationForm.get('sponsorship.type')?.touched" class="invalid-feedback">
+              Please select sponsorship type
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Sponsor's Declaration</label>
+            <textarea class="form-control" rows="4" readonly>
+I.........of......... (Postal address) declare to sponsor......... (Name of applicant) to study at Dodoma Institute of Development and Entrepreneurship Studies-DIDES and that I will pay all fees in time as required including costs for Field Practical Training. My mobile no. is......... and email address:.........
+            </textarea>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="sponsorName">Sponsor's Full Name</label>
+            <input type="text" class="form-control" id="sponsorName" formControlName="sponsorship.name">
+          </div>
+
+          <div class="form-group">
+            <label for="sponsorAddress">Sponsor's Postal Address</label>
+            <input type="text" class="form-control" id="sponsorAddress" formControlName="sponsorship.address">
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sponsorMobile">Sponsor's Mobile Number</label>
+                <input type="tel" class="form-control" id="sponsorMobile" formControlName="sponsorship.mobile">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sponsorEmail">Sponsor's Email Address</label>
+                <input type="email" class="form-control" id="sponsorEmail" formControlName="sponsorship.email">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 6: Declaration and Submission -->
+    <div class="step" *ngIf="currentStep === 6">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>5. Applicant's Declaration</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <textarea class="form-control" rows="4" readonly>
+I.........agree, if admitted to DIDES, to comply with institute regulations. I certify that the information in this application form is true and complete in all aspects and that I have withheld no information. I authorize the institute to verify any information provided as part of this application.
+            </textarea>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" formControlName="declaration.agreeToTerms" id="agreeToTerms">
+            <label class="form-check-label" for="agreeToTerms">
+              I agree to the terms above
+            </label>
+            <div *ngIf="applicationForm.get('declaration.agreeToTerms')?.invalid && 
+                        applicationForm.get('declaration.agreeToTerms')?.touched" class="invalid-feedback">
+              You must agree to the terms
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+          <h5>6. Mode of Payment</h5>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Registration and identity card are paid only once during first year.</li>
+            <li>Course Fee for certificate in Community Development shall be 455,000/- Tsh per semester</li>
+            <li>Course Fee for Ordinary Diploma in Community Development shall be 480,000/-Tsh Per Semester.</li>
+            <li>Course Fee for Certificate in Agriculture Production shall be 455,000/- Tsh per semester</li>
+            <li>Course Fee for Ordinary Diploma in Agriculture Production shall be 480,000/- Per Semester.</li>
+            <li>20,000/- FOR ONLINE REGISTRATION TO NACTVET</li>
+            <li>Medical Health Insurance Fee TZS 50400/- or NHIF Membership Card.</li>
+            <li>Non-refundable application fee (Tshs.10,000/-)</li>
+            <li>Student Union fee Tsh 10,000/-</li>
+          </ul>
+          <p><strong>NOTE:</strong> All payments shall be done through control number provided by the institute</p>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="prevStep()">Previous</button>
+        <button type="submit" class="btn btn-success" [disabled]="!applicationForm.valid">
+          Submit Application
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

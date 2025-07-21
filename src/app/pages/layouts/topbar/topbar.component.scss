@@ -1,0 +1,17 @@
+.dropdown-toggle::after {
+    display: none !important;
+  }
+  
+  .fa {
+    font-size: 1rem; 
+    transition: transform 0.3s;
+  }
+  
+  .fa-chevron-down {
+    transform: rotate(0deg);
+  }
+  
+  .fa-chevron-up {
+    transform: rotate(180deg);
+  }
+  

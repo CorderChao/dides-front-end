@@ -1,0 +1,379 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="header-title">
+        <h2 mat-dialog-title>{{ title }}</h2>
+        <button type="button" class="btn-close btn-close-white ms-auto"
+            style="float: right; font-size: 1rem; padding-top: 20px" data-bs-dismiss="offcanvas" aria-label="Close"
+            mat-dialog-close></button>
+    </div>
+</div>
+
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="userform">
+    <ng-template matStepLabel>User Details</ng-template>
+    <form [formGroup]="userform" autocomplete="off" *ngIf="userType === 'employee'" >
+      <mat-dialog-content>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>User Level</mat-label>
+              <mat-select matInput formControlName="userLevel">
+                <mat-option *ngFor="let type of adminlevel" [value]="type.setupUUID" (click)="checkLevel(type.name)">
+                  {{ type.name }}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>User Designation</mat-label>
+              <mat-select formControlName="userTypeId" placeholder="User Designation">
+                <mat-option [value]="item.setupUUID" *ngFor="let item  of userTypes">
+                  {{item.name}}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-5">
+            <mat-form-field>
+              <mat-label>Identification Number</mat-label>
+              <input matInput formControlName="identificationCardNumber" type="text"
+              (input)="formatNida($event)"
+              pattern="^\d{8}-\d{5}-\d{5}-\d{2}$"
+              maxlength="23"
+                placeholder="IdentificationCard Number">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          </div>
+        <div class="row" >
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" type="text" placeholder="First Name">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Middle Name</mat-label>
+              <input matInput formControlName="middleName" type="text" placeholder="Middle Name">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+
+              <input matInput formControlName="lastName" type="text" placeholder="Last Name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <mat-form-field>
+              <mat-label>Email Address</mat-label>
+              <input matInput formControlName="email" type="text" placeholder="Email Address">
+              <mat-error>Invalid e-mail address!</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" type="text" placeholder="Phone Number"
+              maxlength="10"   pattern="^(06|07)\d{8}$"
+              (input)="formatPhoneNumber($event)">
+              <mat-error
+              *ngIf="
+                userform.get('phoneNumber').invalid &&
+                (userform.get('phoneNumber').dirty ||
+                  userform.get('phoneNumber').touched)
+              "
+            >
+              <span
+                *ngIf="userform.get('phoneNumber').errors['required']"
+                >This is required field!</span
+              >
+              <span *ngIf="userform.get('phoneNumber').errors['pattern']"
+                >Invalid format</span
+              >
+            </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>Sex</mat-label>
+              <mat-select matInput formControlName="sex">
+                <mat-option *ngFor="let item of sex" [value]="item.value">{{ item.name }}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-4" [hidden]="!showRegCon">
+            <mat-form-field>
+              <mat-label>Regions</mat-label>
+              <mat-select matInput formControlName="regionCode" (selectionChange)="onRegionChange($event)">
+                <mat-option *ngFor="let region of regions" [value]="region.code">{{ region.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4" [hidden]="!showCon">
+            <mat-form-field>
+              <mat-label>Councils</mat-label>
+              <mat-select matInput formControlName="councilCode">
+                <mat-option *ngFor="let council of councils" [value]="council.code">{{council.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>  
+       
+        </div>
+
+          <div class="row" *ngIf="isUpdate">
+            <div class="col-2">
+              <mat-slide-toggle color="primary" formControlName="enabled" [checked]="user.enabled"
+                (change)="toggleStatus(user)">
+                <span class="badge text-success" *ngIf="user.enabled"> Enabled </span>
+                <span class="badge text-danger" *ngIf="!user.enabled"> Disabled </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-2">
+              <mat-slide-toggle color="primary" formControlName="accountNonLocked" [checked]="user.accountNonLocked"
+                (change)="toggleStatus3(user)">
+                <span class="badge text-success" *ngIf="user.accountNonLocked"> Not Locked </span>
+                <span class="badge text-danger" *ngIf="!user.accountNonLocked"> Locked </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-3">
+              <mat-slide-toggle color="primary" formControlName="accountNonExpired" [checked]="user.accountNonExpired"
+                (change)="toggleStatus4(user)">
+                <span class="badge text-success" *ngIf="user.accountNonExpired">Account Non Expired </span>
+                <span class="badge text-danger" *ngIf="!user.accountNonExpired"> Account Expired </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-4">
+              <mat-slide-toggle color="primary" formControlName="credentialsNonExpired"
+                [checked]="user.credentialsNonExpired" (change)="toggleStatus2(user)">
+                <span class="badge text-success" *ngIf="user.credentialsNonExpired">Credential Non Expired </span>
+                <span class="badge text-danger" *ngIf="!user.credentialsNonExpired"> Credential Expired </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+
+       
+
+   
+      </mat-dialog-content>
+
+      <button class="form-button" type="submit" mat-raised-button mat-fab extended color="primary"
+        (click)="goForward(stepper, userform.value)" [disabled]="userform.invalid">
+        <span class="text-button">Next&nbsp;<b>>></b></span>
+      </button>
+
+    </form>
+
+
+    <form [formGroup]="userform" autocomplete="off" *ngIf="userType === 'collector'">
+      <mat-dialog-content>
+
+        <div class="row">
+          <!-- <div class="col-3">
+            <mat-form-field>
+              <mat-label>User Level</mat-label>
+              <mat-select matInput formControlName="userLevel">
+                <mat-option *ngFor="let type of adminlevel" [value]="type.setupUUID" (click)="checkLevel(type.name)">
+                  {{ type.name }}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="col-4">
+            <mat-form-field>
+              <mat-label>User Designation</mat-label>
+              <mat-select formControlName="designationCode" placeholder="User Designation">
+                <mat-option [value]="item.setupUUID" *ngFor="let item  of userTypes">
+                  {{item.name}}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div> -->
+          <div class="col-5">
+            <mat-form-field>
+              <mat-label>Identification Number</mat-label>
+              <input matInput formControlName="identificationCardNumber" type="text"
+              (input)="formatNida($event)"
+              pattern="^\d{8}-\d{5}-\d{5}-\d{2}$"
+              maxlength="23"
+                placeholder="IdentificationCard Number">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" type="text" placeholder="Phone Number">
+              <mat-error>Invalid Phone Number!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label>Sex</mat-label>
+              <mat-select matInput formControlName="sex">
+                <mat-option *ngFor="let item of sex" [value]="item.value">{{ item.name }}</mat-option>
+              </mat-select>
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" type="text" placeholder="First Name">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>Middle Name</mat-label>
+              <input matInput formControlName="middleName" type="text" placeholder="Middle Name">
+              <mat-error>This is a required field!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" type="text" placeholder="Last Name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-4" [hidden]="!showRegCon">
+            <mat-form-field>
+              <mat-label>Regions</mat-label>
+              <mat-select matInput formControlName="regionCode" (selectionChange)="onRegionChange($event)">
+                <mat-option *ngFor="let region of regions" [value]="region.code">{{ region.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4" [hidden]="!showCon">
+            <mat-form-field>
+              <mat-label>Councils</mat-label>
+              <mat-select matInput formControlName="councilCode">
+                <mat-option *ngFor="let council of councils" [value]="council.code">{{council.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>  
+       
+        </div>
+
+          <div class="row" *ngIf="isUpdate">
+            <div class="col-2">
+              <mat-slide-toggle color="primary" formControlName="enabled" [checked]="user.enabled"
+                (change)="toggleStatus(user)">
+                <span class="badge text-success" *ngIf="user.enabled"> Enabled </span>
+                <span class="badge text-danger" *ngIf="!user.enabled"> Disabled </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-2">
+              <mat-slide-toggle color="primary" formControlName="accountNonLocked" [checked]="user.accountNonLocked"
+                (change)="toggleStatus3(user)">
+                <span class="badge text-success" *ngIf="user.accountNonLocked"> Not Locked </span>
+                <span class="badge text-danger" *ngIf="!user.accountNonLocked"> Locked </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-3">
+              <mat-slide-toggle color="primary" formControlName="accountNonExpired" [checked]="user.accountNonExpired"
+                (change)="toggleStatus4(user)">
+                <span class="badge text-success" *ngIf="user.accountNonExpired">Account Non Expired </span>
+                <span class="badge text-danger" *ngIf="!user.accountNonExpired"> Account Expired </span>
+              </mat-slide-toggle>
+            </div>
+            <div class="col-4">
+              <mat-slide-toggle color="primary" formControlName="credentialsNonExpired"
+                [checked]="user.credentialsNonExpired" (change)="toggleStatus2(user)">
+                <span class="badge text-success" *ngIf="user.credentialsNonExpired">Credential Non Expired </span>
+                <span class="badge text-danger" *ngIf="!user.credentialsNonExpired"> Credential Expired </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+
+       
+
+   
+      </mat-dialog-content>
+
+      <button class="form-button" type="submit" mat-raised-button mat-fab extended color="primary"
+        (click)="goForward(stepper, userform.value)" [disabled]="userform.invalid">
+        <span class="text-button">Next&nbsp;<b>>></b></span>
+      </button>
+
+    </form>
+  </mat-step>
+  <!-- -->
+  <mat-step [stepControl]="roleForm">
+    <ng-template matStepLabel>Asign User Role</ng-template>
+   
+      <mat-dialog-content>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12" *ngIf="allPermissions.length === 0">
+              <div class="scroll-wrapper scrollbar-inner">
+                <div class="scrollbar-inner scroll-content scroll-scrolly_visible scrollbar">
+                  <p class="p-3 text-center text-muted" style="margin-top: 25%;">
+                    !--EMPTY--! No Available Roles to Select.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <label style="font-weight:bold;" *ngIf="allPermissions.length !== 0">Available Role(s)&nbsp;</label>
+            <div class="col-md-12" *ngIf="allPermissions.length !== 0">
+              <div class="scroll-wrapper scrollbar-inner">
+                <div class="scrollbar-inner scroll-content scroll-scrolly_visible scrollbar">
+                  <mat-selection-list>
+                    <mat-list-option (click)="toggle2(item)" [value]="item" *ngFor="let item of allPermissions">
+                      {{item.name}}
+                    </mat-list-option>
+                  </mat-selection-list>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="scroll-wrapper scrollbar-inner">
+              <div class="scrollbar-inner scroll-content scroll-scrolly_visible scrollbar">
+
+                <mat-selection-list>
+                  <mat-list-option (click)="toggle(item)" [value]="item" *ngFor="let item of assignedPermissions"
+                    [selected]="true">
+                    {{ item.name}}
+                  </mat-list-option>
+                </mat-selection-list>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </mat-dialog-content>
+
+    <button class="form-button-back" type="submit" mat-raised-button mat-fab extended color=yellow
+      (click)="goBack(stepper)">
+      <span class="text-button"><b><<</b>&nbsp;BACK</span>
+    </button>
+    <div class="spacer"></div>
+    <button class="form-button" type="submit" mat-raised-button mat-fab extended color="primary" (click)="save()"
+      [disabled]="userform.invalid">
+      <mat-icon>save</mat-icon>
+      <span class="text-button">SAVE</span>
+    </button>
+
+  </mat-step>
+</mat-horizontal-stepper>

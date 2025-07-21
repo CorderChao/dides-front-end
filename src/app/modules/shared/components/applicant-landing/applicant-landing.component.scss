@@ -1,0 +1,149 @@
+
+.section {
+    margin: 0;
+    padding-top:  2%;
+    height: auto;
+    width: 100%;
+    background-size: cover;
+    overflow-x: hidden !important;
+}
+
+.display-8{
+    color:burlywood;
+}
+
+.display-10{
+    color: aliceblue;  
+}
+
+.card-1{
+    margin: 0;
+    padding: 0;
+    height: 40% !important;
+    width: 100%;
+    background-color: white !important;
+    overflow-x: hidden !important;
+}
+
+.mail-list-link{
+      font-size: 1rem !important;
+}
+
+.email-wrapper{
+    overflow: hidden;
+    height: 44%;
+}
+
+.wrapper{
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+
+
+.scrollbar-inner {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .email-menu-sidebar{
+    overflow-y: hidden;
+    height: 650px;
+  }
+  
+  .form-check{
+    margin-top: 10px !important;	
+  }
+  .form-check-label{
+    padding-left: 5px !important;	
+  }
+  .form-check-input{
+    border: solid 0.5px #000;
+    margin-left: 2px !important;	
+  }
+
+
+.card1{
+  background-color: #405189 ;
+  cursor: pointer;
+  height: 80% !important;
+  border-radius: 0.5rem;
+  transition: transform .5s, box-shadow 1s;
+}
+.card1:hover {
+  transform: scale(1.02) perspective(0px);
+  box-shadow: 0 10px 10px rgba(92, 82, 95, 0.9);
+}
+.card-outer{
+  width: 280px !important;
+  margin-right: 20px;
+}
+.card-inner{
+  padding: 0.5rem 0rem;
+
+  i{
+      font-size: 1.5rem;
+      color: white !important;
+      
+  }
+  h5{
+    color: white !important;
+  }
+  h6{
+    color: rgb(190, 196, 202);
+  }
+  height: 100% !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accordion {
+  width: 300px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  background-color: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  padding: 15px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.accordion-header:hover,
+.accordion-header.active {
+  background-color: #ccc;
+}
+
+.accordion-content {
+  padding: 0 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p {
+  margin: 15px 0;
+}
+
+.cont{
+width: 80%;
+margin: 0 auto;
+}

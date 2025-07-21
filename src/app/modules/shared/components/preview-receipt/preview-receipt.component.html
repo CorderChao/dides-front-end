@@ -1,0 +1,197 @@
+<div class="mat-dialog-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div></div>
+  <div class="header-title">
+    <h2 mat-dialog-title>{{ title }}</h2>
+    <button type="button" class="btn-close btn-close-white ms-auto"
+      style="float: right; font-size: 1rem;padding-top: 20px" data-bs-dismiss="offcanvas" aria-label="Close"
+      mat-dialog-close>
+    </button>
+  </div>
+</div>
+<mat-dialog-content>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <ng-container>
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="row" id="printingAreaDiv">
+                                <div class="certificate-content">
+                                    <div class="cert-heading text-center bb-dotted">
+                                        <div class="row">
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <span class="circular_image">
+                                                        <img [src]="logo" alt="" height="80" width="80">
+                                                    </span>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+
+                                            </div>
+
+                                            <div class="col-md-8 my-auto">
+                                                <h4 class="my-1">THE UNITED REPUBLIC OF TANZANIA</h4>
+                                                <h4>{{organization?.name}}</h4>
+                                                <h4 class="my-1">Payment Receipt</h4>
+                                            </div>
+                                            <div class="col-md-2">
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="cert-text">
+                                        <div class="text">
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-10">
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Receipt Number</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class=""> {{ payment?.pspReceipt }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2 pt-3">
+                                                        <div class="col-md-5">Received From</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ payment?.payerName }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2 pt-3">
+                                                        <div class="col-md-5">Amount</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ payment?.paidAmount|number }} -
+                                                                {{payment?.bill?.currencyCode}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Amount In Words</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class=""> {{writeWords(payment?.paidAmount) }}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Outstanding Balance</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">0</span>
+                                                        </div>
+                                                    </div>
+
+                                                     <div class="mt-2">
+                                                <div class="row">
+                                                    <div class="col-md-2"><b>No.</b></div>
+                                                    <div class="col-md-5 text-left"><b>Items Description (s)</b></div>
+                                                    <div class="col-md-2 text-left "><b>Quantity</b></div>
+                                                    <div class="col-md-3 "><b>Items Amount</b></div>
+                                                </div>
+                                                <hr />
+                                                <div *ngFor="let item of billItems; let i =index" class="row">
+                                                    <div class="col-md-2">({{ i + 1}})</div>
+                                                    <div class="col-md-5">
+                                                        {{ item?.description }}
+                                                        <hr />
+                                                    </div>
+                                                  <div class="col-md-2">
+                                                        1
+                                                        <hr />
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        {{ item?.totalAmount | number }}
+                                                        <hr />
+                                                    </div>
+
+                                                    <!-- <div class="col-md-3">
+                                                        {{ item?.totalAmount | number }} --
+                                                        <hr />
+                                                    </div> -->
+                                                </div>
+
+                                                <div class="row">
+                                                <div class="col-md-2"></div>
+                                                    <div class="col-md-6"><b>Total Paid Amount</b></div>
+                                                    <div class="col-md-4 mr-0">
+                                                        <strong>{{ payment?.billAmount | number }}
+                                                            ({{payment?.bill?.currencyCode}})</strong>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Bill Reference</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ payment?.gepgReceipt }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Payment Control</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{payment?.controlNumber }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Payment Date</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ payment?.transactionDate |date:'medium' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">Issued By</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ organization?.name}}</span>
+                                                        </div>
+                                                    </div>
+                                                         <div class="row my-2">
+                                                        <div class="col-md-5">Date Issued</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <span class="">{{ payment?.createdDate |
+                                                                date:'medium'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-2">
+                                                        <div class="col-md-5">SIGNATURE</div>
+                                                        <div class="col-md-7 dotted">
+                                                            <!-- <span class="">...........................</span> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-1">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button class="btn-primary  text-white" mat-raised-button ngxPrint color="primary"
+                                (click)="printDiv('printingAreaDiv')" printSectionId="printingAreaDiv">
+                                <mat-icon>print</mat-icon>
+                                <span>Print</span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

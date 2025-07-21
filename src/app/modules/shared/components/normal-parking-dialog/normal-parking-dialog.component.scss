@@ -1,0 +1,52 @@
+
+.form-button-back{
+    color: white;
+    background-color: green;
+   }
+   
+   
+   
+   .separator {
+       display: flex;
+       align-items: center;
+       text-align: center;
+     }
+     
+     .separator::before,
+     .separator::after {
+       content: '';
+       flex: 1;
+       border-bottom: 1px solid #000;
+     }
+     
+     .separator:not(:empty)::before {
+       margin-right: .25em;
+     }
+     
+     .separator:not(:empty)::after {
+       margin-left: .25em;
+     }
+   
+    .scrollbar-inner{
+     border-right: 0.25px  solid #000;
+     height: 300px !important;
+    }
+
+    h5{
+      color: #fff;
+    }
+    
+    .wrapper{
+      overflow: hidden !important;
+    }
+    
+    
+    .header { 
+      background-color: #89898b;
+     }
+    
+    h6{
+      color: #fff;
+    }
+   
+   

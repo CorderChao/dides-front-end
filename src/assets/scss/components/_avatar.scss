@@ -1,0 +1,74 @@
+//
+// avatar.scss
+//
+
+.avatar-xxs {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.avatar-xs {
+    height: 2rem;
+    width: 2rem;
+}
+
+.avatar-sm {
+    height: 3rem;
+    width: 3rem;
+}
+
+.avatar-md {
+    height: 4.5rem;
+    width: 4.5rem;
+}
+
+.avatar-lg {
+    height: 6rem;
+    width: 6rem;
+}
+
+.avatar-xl {
+    height: 8.5rem;
+    width: 8.5rem;
+    border: 0.25rem solid $primary;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   transition: transform 0.3s ease-in-out;
+   overflow: hidden;
+   cursor: pointer;
+}
+
+.avatar-xl:hover {
+    transform: scale(0.95);
+  }
+
+.avatar-title {
+    align-items: center;
+    background-color: $primary;
+    color: $white;
+    display: flex;
+    font-weight: $font-weight-medium;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+// avatar group
+.avatar-group {
+    padding-left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .avatar-group-item {
+        margin-left: -12px;
+        border: 2px solid var(--#{$prefix}secondary-bg);
+        border-radius: 50%;
+        transition: all 0.2s;
+
+        &:hover {
+            position: relative;
+            transform: translateY(-2px);
+            z-index: 1;
+        }
+    }
+}

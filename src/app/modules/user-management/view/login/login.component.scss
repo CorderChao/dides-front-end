@@ -1,0 +1,66 @@
+.auth-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  // background-image: url("../../../assets/images/laws2.jpg");.
+  background-image: url("../../../../../assets/images/slide3.jpeg");
+  .bg-overlay {
+    background: linear-gradient(
+      to right,
+      darken(rgba(230, 230, 231, 0.8), 6%),
+      rgba(3, 11, 48, 0.8)
+    );
+    opacity: 0.9;
+  }
+}
+
+.auth-page-wrapper{
+  height: 100%;
+  overflow: hidden !important;
+  background-image: url(../../../../../assets/images/bg-pattern.png);
+}
+
+.blue-text{
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 1.4rem;
+  color: #00AEEF !important;
+}
+
+.bracket-text{
+ font-weight: 700;
+ margin: 0;
+ padding: 0;
+ line-height: 1;
+ font-size: 1rem;
+ color:  #fcb91a !important;
+}
+
+.input-with-icon {
+  position: relative; 
+}
+
+.input-with-icon i {
+  position: absolute; 
+  left: 10px;
+  top: 50%; 
+  transform: translateY(-50%); 
+  font-size: 1.2em;
+  color: #9c9999;
+}
+
+.input-with-icon input[type="text"],
+.input-with-icon input[type="password"]{
+  padding-left: 40px;
+}
+
+.forgot-psw{
+  color: #00AEEF;
+  padding-bottom: 12px;
+  cursor: pointer;
+}
+
+.forgot-psw:hover {
+  color: #0096FF;
+}
