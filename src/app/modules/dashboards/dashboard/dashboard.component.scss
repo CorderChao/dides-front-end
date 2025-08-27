@@ -1,12 +1,47 @@
-.mb-1{
+.dides-card-primary {
+  background-color: #00563F !important; // DIDES primary green
+}
+
+.dides-card-secondary {
+  background-color: #8C6134 !important; // DIDES secondary brown
+}
+
+.dides-card-tertiary {
+  background-color: #2F5A3B !important; // DIDES tertiary green
+}
+
+.dides-card-quaternary {
+  background-color: #5D5E37 !important; // DIDES accent color
+}
+
+.mb-1 {
   color: white !important;
   font-size: 1.5rem;
 }
 
-.text-muted{
-    color: white !important;
+.text-muted {
+  color: white !important;
+  opacity: 0.9 !important;
 }
 
-.col-3{
-    padding-right: 10px !important;
-} 
+.card-title {
+  color: #00563F;
+  font-weight: 600;
+}
+
+.table {
+  th {
+    background-color: #f8f9fa;
+    color: #00563F;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+  }
+}
+
+.col-3 {
+  padding-right: 10px !important;
+  padding-bottom: 10px !important;
+}

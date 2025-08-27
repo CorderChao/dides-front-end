@@ -62,7 +62,7 @@
         <div class="d-flex gap-3 justify-content-center mt-4">
               <a routerLink="/online-application" class="btn btn-secondary">Online Application</a>
             <a routerLink="/login" class="btn btn-success">Staff's Login</a>
-            <button class="btn btn-danger" (click)="openEnd(filtetcontent, 'LOGIN')">Student's Login</button>
+            <button class="btn btn-danger" (click)="openEnd(filtetcontent, 'STUDENTS LOGIN')">Student's Login</button>
         </div>       
     </div>
 
@@ -78,20 +78,21 @@
         <button type="button" class="btn-close btn-close-white ms-auto " data-bs-dismiss="offcanvas" aria-label="Close"
             (click)="offcanvas.dismiss('Cross click')"></button>
     </div>
-    <div class="offcanvas-body p-0">
+    <div class="offcanvas-body p-3">
         <div class="auth-page-content">
             <div class="container">
-                <div class="text-center mt-sm-3 mb-4 text-white-50">
+                <span style="font-size: 1rem; font-weight: 700; text-align: center;">DODOMA INSTITUTE OF DEVELOPMENT AND ENTREPRENEURSHIP STUDIES (DIDES)</span>
+                <div class="text-center mt-sm-3 mb-4 text-white-50 pt-3" >
                     <div>
                         <a href="javascript:void(0);" class="d-inline-block auth-logo">
-                            <img src="../../../../../assets/images/logo.png" alt="" height="100" widit="auto">
+                            <img src="../../../../../assets/images/logo.png" alt="" height="120" widit="auto">
                         </a>
                     </div>
                 </div>
                 <div class="row p-2 d-flex justify-content-center">
                 
 
-                    <form [formGroup]="loginForm" *ngIf="title === 'LOGIN' && !resetPass">
+                    <form [formGroup]="loginForm" *ngIf="title === 'STUDENTS LOGIN' && !resetPass">
                         <div class="mb-1">
                             <label class="form-label" for="username">E - MAIL</label>
                             <input type="username" class="form-control" id="username" formControlName="username"
@@ -131,14 +132,14 @@
                         <a style="cursor:pointer;" (click)="searchUserByEmail()" class="link">Forgot Password?</a>
 
                         <div class="mt-4">
-                            <button [disabled]="loginForm.invalid" (click)="onSubmit(loginForm.value)" class="btn btn-primary w-100" type="submit">Sign In</button>
+                            <button [disabled]="loginForm?.invalid" (click)="onSubmit(loginForm?.value)" class="btn btn-primary w-100" type="submit">Sign In</button>
                         </div>
                         <div class="mt-4 text-center">
                             <p class="mb-0">Don't have an account ? <a routerLink="#" class="link">Register</a> </p>
                         </div>
                     </form>
 
-                    <form [formGroup]="loginForm" *ngIf="title === 'LOGIN' && resetPass">
+                    <form [formGroup]="loginForm" *ngIf="title === 'STUDENTS LOGIN' && resetPass">
                         <div class="mb-1">
                             <p>Enter Registered e-mail to reset your Password</p>
                             <label class="form-label" for="username">E-MAIL</label>

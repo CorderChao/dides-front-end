@@ -178,20 +178,31 @@ export class OnlineApplicationComponent {
     switch (this.currentStep) {
       case 1: return this.applicationForm.get('personalInfo')?.valid ?? false;
       case 2: return this.applicationForm.get('nextOfKin')?.valid ?? false;
-      case 3: return true;
-      case 4: return true;
+      case 3: 
+      const courseSelection = this.applicationForm.get('courseSelection');
+      return (courseSelection?.get('selectedCourses')?.value?.length > 0 || 
+              courseSelection?.get('selectedVetaCourses')?.value?.length > 0 ||
+              courseSelection?.get('selectedFreeCourses')?.value?.length > 0);;
+      case 4: const education = this.applicationForm.get('educationBackground');
+      // At least primary school info should be filled
+      return !!education?.get('primarySchool.schoolName')?.value || 
+             !!education?.get('secondarySchool.schoolName')?.value ||
+             !!education?.get('advancedEducation.schoolName')?.value ||
+             this.otherQualifications.length > 0;;
       case 5: return this.applicationForm.get('sponsorship')?.valid ?? false;
       default: return false;
     }
   }
 
-  markCurrentStepAsTouched(): void {
-    switch (this.currentStep) {
-      case 1: this.applicationForm.get('personalInfo')?.markAllAsTouched(); break;
-      case 2: this.applicationForm.get('nextOfKin')?.markAllAsTouched(); break;
-      case 5: this.applicationForm.get('sponsorship')?.markAllAsTouched(); break;
-    }
+markCurrentStepAsTouched(): void {
+  switch (this.currentStep) {
+    case 1: this.applicationForm.get('personalInfo')?.markAllAsTouched(); break;
+    case 2: this.applicationForm.get('nextOfKin')?.markAllAsTouched(); break;
+    case 3: this.applicationForm.get('courseSelection')?.markAllAsTouched(); break;
+    case 4: this.applicationForm.get('educationBackground')?.markAllAsTouched(); break;
+    case 5: this.applicationForm.get('sponsorship')?.markAllAsTouched(); break;
   }
+}
 
   onSubmit(): void {
     this.markAllAsTouched();

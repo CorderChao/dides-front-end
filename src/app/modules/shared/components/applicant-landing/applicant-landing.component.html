@@ -1,37 +1,32 @@
 <div class="wrapper">
-    <div class="profile-foreground position-relative ">
+    <div class="profile-foreground position-relative">
         <div class="profile-wid-bg" style="height: 250px;">
-            <img src="assets/images/slide2.jpeg" alt="" class="profile-wid-img" />
+            <img src="assets/images/college-banner.jpg" alt="" class="profile-wid-img" />
         </div>
 
         <div class="row justify-content-center" style="height: 200px;">
-            <div class="col-lg-8 col-sm-10">
-                <div class="text-center pt-2">
-                    <h1 class="text-success">
-                        DIDES 
-                    </h1>
+            <div class="col-lg-10 col-sm-12">
+                <div class="text-center pt-4">
+                    <p class="welcome-text"><span class="text-yellow">DODOMA INSTITUTE OF DEVELOPMENT AND</span> </p>
+                 <p class="welcome-text"><span class="text-yellow"> ENTREPRENEURSHIP STUDIES (DIDES)</span></p>
                     <h2 class="display-8 fw-semibold mb-3 lh-base">
-                        <span class="display-10 fw-semibold mb-3 lh-base">&nbsp;&nbsp;WELCOME </span>
-                        {{user?.companyName !== '' ? user?.companyName : user?.firstName+' '+user?.middleName+'
-                        '+user?.lastName}},
+                        <span class="display-10 fw-semibold mb-3 lh-base" style="font-style: italic;">&nbsp;&nbsp;Welcome, </span> <br />
+                         {{student?.firstName}} {{student?.middleName}} {{student?.lastName}} 
+                        
                     </h2>
-                    <p class="lead text-white lh-base">
-                        {{user?.identificationCardType?.name}}:&nbsp;&nbsp;<span
-                            class="text-success">{{user?.identificationCardNumber}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        Phone Number:&nbsp;&nbsp;<span
-                            class="text-success">{{user?.phoneNumber}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        e-mail:&nbsp;&nbsp;<span class="text-success">{{user?.email}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        Address:&nbsp;&nbsp;<span class="text-success">{{user?.address}}</span>
-                    </p>
-
-                    <div class="d-flex gap-2 justify-content-start mt-3 mb-1">
-                        <button type="button" style="width: auto; height: 35px;" (click)="openModalFromInside()"
-                            class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#composemodal">
-                            New Application
-                        </button>
-
-                        <div class="spacer"></div>
-
+                    <div class="profile-picture-container">
+                        <img [src]="student?.profilePicture || 'assets/images/default-profile.png'" 
+                             alt="Profile Picture" class="profile-picture">
+                    </div>
+                    <div class="row text-white lh-base">
+                        <div class="col-10">
+  Student ID:&nbsp;&nbsp;<span class="text-success">{{student?.studentId}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Program:&nbsp;&nbsp;<span class="text-success">{{student?.program}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Year:&nbsp;&nbsp;<span class="text-success">{{student?.year}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Semester:&nbsp;&nbsp;<span class="text-success">{{student?.semester}}</span>
+                        </div>
+                        <div class="col-2">
+                            <div class="d-flex  justify-content-center">
                         <div class="dropdown" (click)="toggleDropdown($event)" [class.show]="isDropdownOpen"
                             style="position: relative;">
                             <div id="profileDropdown"
@@ -66,161 +61,81 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
+                        </div>
+                      
+                    </div> 
+
                 </div>
             </div>
         </div>
+
         <section class="section nft-hero" id="hero">
             <div class="pt-4 mb-4 mb-lg-3 pb-lg-4">
                 <div class="cont">
                     <div class="col-12">
-
-                        <div class="card-body">
-                            <div class="mx-n3">
-                                <ngx-simplebar style="max-height: 400px; width: 100%;" class="px-3">
-                                    <data-table [columns]="columns" [items]="applications" [sort]="true"
-                                        caption="List of Applications" subTitle="">
-                                        <ng-template pTemplate="createdDate" let-item>
-                                            {{item.createdDate | date: 'dd/MM/yyyy'}}
-                                        </ng-template>
-                                        <!-- <ng-template pTemplate="subsource" let-item>
-                            {{ item.items[0]?.subSource?.name}}
-                        </ng-template> -->
-                                        <ng-template pTemplate="items" let-item>
-                                            {{ item?.items[0]?.subSource?.name}}
-                                        </ng-template>
-                                        <ng-template pTemplate="Status" let-item>
-                                            <i class="{{
-                              item.enabled
-                                ? 'ri-checkbox-circle-fill text-success'
-                                : 'ri-close-circle-fill text-danger'
-                            }} align-middle "></i>
-                                            <span class="{{ item.enabled ? 'text-success' : 'text-danger' }}">
-                                                {{ item.enabled ? "Active" : "Disabled" }}
-                                            </span>
-                                        </ng-template>
-                                        <ng-template pTemplate="actions" let-item let-index>
-                                            <button [matMenuTriggerFor]="menu" mat-icon-button>
-                                                <mat-icon>more_vert</mat-icon>
-                                            </button>
-
-                                            <mat-menu #menu="matMenu">
-                                                <!-- <button type="button" class="btn btn-success " data-bs-toggle="modal"
-                                data-bs-target=".bs-example-modal-lg" (click)="largeModal(largeDataModal)">Large
-                                Modal</button> -->
-
-                                                <button mat-menu-item (click)="previewApplication(item)">
-                                                    <mat-icon color="primary">view_list</mat-icon>View Application
-                                                </button>
-                                               <button *ngIf="item?.applicationStatus?.name === 'EXPIRED'" mat-menu-item (click)="renewApplication(item.uuid)">
-                                                    <mat-icon color="primary">view_list</mat-icon>Renew Application
-                                                </button>
-                                                <button *ngIf="item?.applicationBills?.length !== 0"
-                                                    mat-menu-item (click)="previewBill(item)">
-                                                    <mat-icon color="primary">view_list</mat-icon>View Bill
-                                                </button>
-                                                    <button *ngIf="item?.applicationBillPayments?.length !== 0"
-                                                    mat-menu-item (click)="previewPayments(item)">
-                                                    <mat-icon color="primary">view_list</mat-icon>View Payments
-                                                </button>
-                                               <button *ngIf="item?.permitNumber !== null" mat-menu-item  (click)="previewPermit(item)">
-                                                   <mat-icon color="primary">view_list</mat-icon> View Permit
-                                                </button>
-                                               <!-- <button mat-menu-item (click)="update(item)">
-                                                    <mat-icon color="primary">view_list</mat-icon>Edit
-                                                </button> -->
-                                               <button *ngIf="item?.applicationStatus?.name === 'RETURNED'" mat-menu-item (click)="update(item)">
-                                                    <mat-icon color="primary">view_list</mat-icon>Re-Apply
-                                                </button>
-                                               <!-- <button  mat-menu-item  (click)="update(item)">
-                                                   <mat-icon color="primary">view_list</mat-icon> Edit Application
-                                                </button> -->
-                                            </mat-menu>
-                                        </ng-template>
-                                    </data-table>
-                                </ngx-simplebar>
-                            </div>
-                        </div>
+                        <mat-tab-group (selectedTabChange)="onTabChanged($event)" class="custom-tab-group" >
+                            <mat-tab label="RESULTS" >
+                                <div class="card-body">
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 400px; width: 100%;" class="px-3">
+                                            <data-table [columns]="resultsColumns" [items]="results" [sort]="true"
+                                                caption="Academic Results" subTitle="">
+                                                <ng-template pTemplate="semester" let-item>
+                                                    {{item.semester | uppercase}}
+                                                </ng-template>
+                                                <ng-template pTemplate="actions" let-item>
+                                                    <button mat-icon-button (click)="viewResultDetails(item)">
+                                                        <mat-icon color="primary">visibility</mat-icon>
+                                                    </button>
+                                                </ng-template>
+                                            </data-table>
+                                        </ngx-simplebar>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            
+                            <mat-tab label="TIMETABLE">
+                                <div class="card-body">
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 400px; width: 100%;" class="px-3">
+                                            <data-table [columns]="timetableColumns" [items]="timetable" [sort]="true"
+                                                caption="Class Timetable" subTitle="">
+                                                <ng-template pTemplate="day" let-item>
+                                                    {{item.day | uppercase}}
+                                                </ng-template>
+                                                <ng-template pTemplate="time" let-item>
+                                                    {{item.startTime}} - {{item.endTime}}
+                                                </ng-template>
+                                            </data-table>
+                                        </ngx-simplebar>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            
+                            <mat-tab label="ANNOUNCEMENTS">
+                                <div class="card-body">
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 400px; width: 100%;" class="px-3">
+                                            <div *ngFor="let announcement of announcements" class="announcement-card">
+                                                <h5>{{announcement.title}}</h5>
+                                                <p class="text-muted"><small>{{announcement.date | date: 'mediumDate'}}</small></p>
+                                                <p>{{announcement.content}}</p>
+                                                <div *ngIf="announcement.attachment" class="mt-2">
+                                                    <a href="{{announcement.attachment}}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                        <i class="ri-download-line"></i> Download Attachment
+                                                    </a>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </ngx-simplebar>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- </div> -->
-
-
-        <!-- Standard Modal -->
-        <ng-template #largeDataModal let-modal>
-            <div class="modal-header">
-                <h5 class="modal-title" id="myLargeModalLabel" style="margin-left: 280px;">Application Information</h5>
-                <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"
-                    aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <hr>
-                <h6 class="fs-15"><strong>Applicant Details:</strong></h6>
-                <hr>
-                <div class="row">
-                    <div class="col-3 "><strong>Applicant Name:</strong></div>
-                    <div class="col-8 "> {{application.applicant?.companyName !== '' ?
-                        application.applicant?.companyName
-                        :
-                        application.applicant?.firstName+' '+application.applicant?.middleName+'
-                        '+application.applicant?.lastName}},</div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-3"><strong>Address:</strong></div>
-                    <div class="col-3"> {{application?.applicant?.address}}</div>
-                    <div class="col-2"><strong>Email:</strong></div>
-                    <div class="col-3">{{application?.applicant?.email}}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-3"><strong>Mobile No:</strong></div>
-                    <div class="col-3"> {{application?.applicant?.phoneNumber}}</div>
-                    <div class="col-2"><strong>Username:</strong></div>
-                    <div class="col-3">{{application?.applicant?.username}}</div>
-                </div>
-                <hr>
-                <h6 class="fs-15"><strong>Applicantion Details:</strong></h6>
-                <hr>
-                <div class="row">
-                    <div class="col-3"><strong>Status:</strong></div>
-                    <div class="col-3"> {{application?.applicationStatus?.name}}</div>
-                    <div class="col-2"><strong>Applied On:</strong></div>
-                    <div class="col-3">{{application?.createdDate | date: 'dd/MM/yyyy'}}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-3"><strong>Council:</strong></div>
-                    <div class="col-3"> {{application?.street?.ward?.council?.name}}</div>
-                    <div class="col-2"><strong>Street:</strong></div>
-                    <div class="col-3">{{application?.street?.streetName}}</div>
-                </div>
-
-                <div class="row" *ngFor="let item of application.items">
-                    <div class="col-3"><strong>Item:</strong></div>
-                    <div class="col-3"> {{item?.subSource?.name}} - {{item?.name}}</div>
-                    <div class="col-2"><strong>Quantity/Area:</strong></div>
-                    <div class="col-3">{{application?.quantity}}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-3"><strong>Organization:</strong></div>
-                    <div class="col-3"> {{application?.organization?.name}}</div>
-                    <div class="col-2"><strong>Address:</strong></div>
-                    <div class="col-3">{{application?.organization?.address}}</div>
-                </div>
-                <!-- 
-            <div class="row">
-                <div class="col-3"><strong>ApplicationId:</strong></div>
-                <div class="col-3"> {{application?.uuid}}</div>
-            </div> -->
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-            </div>
-        </ng-template>
+    </div>
+</div>

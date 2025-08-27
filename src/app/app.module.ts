@@ -28,7 +28,6 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { PagesModule } from "./pages/pages.module";
 import { environment } from "src/environments/environment.prod";
 import { ToastrModule } from "ngx-toastr";
-import { JwtInterceptor } from "./modules/user-management/services/token.interceptor";
 import { DataService } from "./modules/settings/data-service";
 
 export function createTranslateLoader(http: HttpClient): any {
@@ -72,7 +71,7 @@ export function createTranslateLoader(http: HttpClient): any {
 
   providers: [
     DataService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent],

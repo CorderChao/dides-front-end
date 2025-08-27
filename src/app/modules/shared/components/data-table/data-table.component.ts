@@ -7,11 +7,11 @@ import {
   SimpleChanges,
   TemplateRef,
 } from "@angular/core";
-import { TableDataRow } from "src/app/modules/data-table/table-data-row";
 import { UtilityFunctionsService } from "../../services/utility-functions.service";
 import { BehaviorSubject, Observable } from "rxjs";
 import { FilterByPipe } from "ngx-pipes";
 import { sortBy } from "lodash";
+import { TableDataRow } from "../../models/data-table-rows/table-data-row";
 export interface Params<T> {
   page: T;
   size: T;

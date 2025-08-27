@@ -7,28 +7,23 @@ import { LayoutComponent } from "./pages/layouts/layout.component";
 import { AuthGuard } from "./core/guards/auth.guard";
 import { AboutusComponent } from "./modules/shared/components/aboutus/aboutus.component";
 import { HomepageComponent } from "./modules/shared/components/homepage/homepage.component";
-import { CustomerComponent } from "./modules/shared/components/customer/customer.component";
-import { CustomerApplicationComponent } from "./modules/shared/components/customer-application/customer-application.component";
-import { CustomerPaymentComponent } from "./modules/shared/components/customer-payment/customer-payment.component";
 import { FaqsComponent } from "./modules/shared/components/faqs/faqs.component";
-import { LoginComponent } from "./modules/user-management/view/login/login.component";
 import { PageNotFoundComponent } from "./modules/shared/components/page-not-found/page-not-found.component";
 import { ApplicantLandingComponent } from "./modules/shared/components/applicant-landing/applicant-landing.component";
 import { OnlineApplicationComponent } from "./modules/shared/components/online-application/online-application.component";
+import { LoginComponent } from "./modules/user-management/view/login/login.component";
 
 const routes: Routes = [
     {path: "", component: HomepageComponent}, 
     {path: "home", component: HomepageComponent}, 
     { path: "faqs", component: FaqsComponent },
     { path: "aboutus", component: AboutusComponent },
-    { path: "login", component: LoginComponent },
+   { path: "login", component: LoginComponent },
     { path: "online-application", component: OnlineApplicationComponent },
-    { path: "customer", component: CustomerComponent,},
     { path: "inbox", 
       component: ApplicantLandingComponent,
       canActivate: [AuthGuard],
     },
-    { path: "payment", component: CustomerPaymentComponent,},
     {
       path: "dashboards",
       data: {
@@ -42,41 +37,8 @@ const routes: Routes = [
         import("../app/modules/dashboards/dashboards.module").then((m) => m.DashboardsModule),
         canActivate: [AuthGuard],
     },
-  {
-    path: "auths",
-    component: LayoutComponent,
-    loadChildren: () =>
-      import("../app/modules/user-management/user-management.module").then(
-        (m) => m.UserManagementModule
-      ),
-      canActivate: [AuthGuard],
-  },
-  {
-    path: "devices",
-    component: LayoutComponent,
-    data: { 
-      parentNode: "Device Management",
-      childNode: "Device List",
-      title: "Device Management",
-      active: true,
-    },
-    loadChildren: () =>
-      import("./modules/pos-management/pos-management.module").then((m) => m.PosManagementModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "scans",
-    component: LayoutComponent,
-    data: { 
-      parentNode: "Scans Management",
-      childNode: "Scans List",
-      title: "Scans Management",
-      active: true,
-    },
-    loadChildren: () =>
-      import("./modules/scans-management/scans-management.module").then((m) => m.ScansManagementModule),
-    canActivate: [AuthGuard],
-  },
+
+
   {
     path: "reports",
     component: LayoutComponent,

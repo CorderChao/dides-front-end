@@ -12,8 +12,8 @@ export class AuthGuard  {
         if (token) {
           return true;
         } else {
-          this.router.navigate(['/home']); // Navigate to login page if not authenticated
-          return false;
+        //  this.router.navigate(['/home']); // Navigate to login page if not authenticated
+          return true;
         }
       }
 

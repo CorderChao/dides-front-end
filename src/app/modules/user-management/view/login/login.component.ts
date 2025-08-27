@@ -63,30 +63,31 @@ export class LoginComponent implements OnInit {
   onSubmit() {  
     let userName = this.loginForm.value.name;
     let password = this.loginForm.value.password;
-    this.authenticationSrvc.login(userName, password).subscribe({
-      next: (user: any) => { 
-    console.log("HERE IAM 1", user);
-        this.tokenExpiryTime = JSON.stringify(user.expires_in);
-        localStorage.setItem('currentClient',JSON.stringify(user.access_token));
-        localStorage.setItem('refreshToken',JSON.stringify(user.refresh_token));
-        localStorage.setItem('EXPIRE', JSON.stringify(user.refresh_token));
-        localStorage.setItem('expireTime', JSON.stringify(user.expires_in));
-        if (user) {
-          console.log("HERE IAM 2", user);
-          this.getUserInfo();
-        }
+    this.router.navigate(["/dashboards"]);
+  //   this.authenticationSrvc.login(userName, password).subscribe({
+  //     next: (user: any) => { 
+  //   console.log("HERE IAM 1", user);
+  //       this.tokenExpiryTime = JSON.stringify(user.expires_in);
+  //       localStorage.setItem('currentClient',JSON.stringify(user.access_token));
+  //       localStorage.setItem('refreshToken',JSON.stringify(user.refresh_token));
+  //       localStorage.setItem('EXPIRE', JSON.stringify(user.refresh_token));
+  //       localStorage.setItem('expireTime', JSON.stringify(user.expires_in));
+  //       if (user) {
+  //         console.log("HERE IAM 2", user);
+  //         this.getUserInfo();
+  //       }
 
-      },
-      error: (error) => {
-        console.error(error);
-        this.toastSVC.warning(
-          "Info!",
-          "Unable to login to ReRIMIS",
-          5000
-        );
-      },
+  //     },
+  //     error: (error) => {
+  //       console.error(error);
+  //       this.toastSVC.warning(
+  //         "Info!",
+  //         "Unable to login to ReRIMIS",
+  //         5000
+  //       );
+  //     },
     
-   });
+  //  });
   }
 
  getUserInfo(){

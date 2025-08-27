@@ -10,22 +10,17 @@ import {
 import { DOCUMENT } from "@angular/common";
 
 //Logout
-import { AuthfakeauthenticationService } from "src/app/core/services/authfake.service";
-import { TokenStorageService } from "src/app/core/services/token-storage.service";
 
 // Language
 import { CookieService } from "ngx-cookie-service";
 import { LanguageService } from "src/app/core/services/language.service";
-import { TranslateService } from "@ngx-translate/core";
 import { allNotification, messages } from "./data";
 import { CartModel } from "./topbar.model";
 import { cartData } from "./data";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EventService } from "src/app/core/services/event.service";
-import { AuthenticationService } from "src/app/modules/user-management/services/authentication.service";
 import { ToastService } from "src/app/modules/shared/services/toast.service";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { ChangeDefaultPasswordComponent } from "src/app/modules/user-management/view/change-default-password/change-default-password.component";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog"
 
 @Component({
   selector: "app-topbar",
@@ -59,8 +54,8 @@ export class TopbarComponent implements OnInit {
     public languageService: LanguageService,
     private modalService: NgbModal,
     public _cookiesService: CookieService,
-    public translate: TranslateService,
-    private authService: AuthenticationService,
+    // public translate: TranslateService,
+    // private authService: AuthenticationService,
     private toastSvc: ToastService,
     private modal: MatDialog
   ) {}
@@ -198,7 +193,7 @@ export class TopbarComponent implements OnInit {
    * Logout the user
    */
   logout() {
-   this.authService.logout();
+  // this.authService.logout();
    // this.router.navigate(["/login"]);
   }
 
@@ -220,21 +215,21 @@ export class TopbarComponent implements OnInit {
     config.panelClass = "mat-dialog-box";
     config.backdropClass = "mat-dialog-overlay";
 
-    const dialog = this.modal.open(ChangeDefaultPasswordComponent, config);
-    dialog.afterClosed().subscribe((response) => {
-      if (response.code === 6000) {
-        this.toastSvc.success(
-          "Information",
-          `Your new Password was successfully changed, use your new Password to login`,
-          6000
-        );
-      } else if (response.code === 6002) {
-        this.toastSvc.warning("Information", `${response.description}`, 6000);
-      } else if (response.code === 6005) {
-        this.toastSvc.warning("Information", `${response.description}`, 6000);
-      } else {
-      }
-    });
+    // const dialog = this.modal.open(ChangeDefaultPasswordComponent, config);
+    // dialog.afterClosed().subscribe((response) => {
+    //   if (response.code === 6000) {
+    //     this.toastSvc.success(
+    //       "Information",
+    //       `Your new Password was successfully changed, use your new Password to login`,
+    //       6000
+    //     );
+    //   } else if (response.code === 6002) {
+    //     this.toastSvc.warning("Information", `${response.description}`, 6000);
+    //   } else if (response.code === 6005) {
+    //     this.toastSvc.warning("Information", `${response.description}`, 6000);
+    //   } else {
+    //   }
+    // });
   }
 
 

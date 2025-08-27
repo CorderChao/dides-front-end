@@ -92,14 +92,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { RouterModule } from "@angular/router";
 import { ApplicationsFormsComponent } from './components/applications-forms/applications-forms.component';
-import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { PreviewApplicationComponent } from './components/preview-application/preview-application.component';
-import { EditApplicationComponent } from "./components/edit-application/edit-application.component";
-import { ListBillsComponent } from "./components/list-bills/list-bills.component";
-import { PreviewBillComponent } from "./components/preview-bill/preview-bill.component";
-import { PreviewPaymentsComponent } from './components/preview-payments/preview-payments.component';
-import { PreviewReceiptComponent } from './components/preview-receipt/preview-receipt.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { AboutusComponent } from "./components/aboutus/aboutus.component";
 import { SafePipe } from "src/assets/safe.pipe";
@@ -144,12 +137,6 @@ const maskConfig: Partial<IConfig> = {
     TabsComponent,
     PageNotFoundComponent,
     ApplicationsFormsComponent,
-    EditUserProfileComponent,
-    PreviewBillComponent,
-    EditApplicationComponent,
-    ListBillsComponent,
-    PreviewPaymentsComponent,
-    PreviewReceiptComponent,
     TermsComponent,
     OnlineApplicationComponent
   ],

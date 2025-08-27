@@ -191,56 +191,58 @@ export class HomepageComponent implements OnInit {
   }
 
   public async onSubmit(payload: any) {
-    let userName = payload.username;
-    let password = payload.password;
-    this.authenticationSvc.login(userName, password).subscribe({
-      next: (user: any) => {
-        if (user) {
-          this.tokenExpiryTime = JSON.stringify(user.expires_in);
-          localStorage.setItem(
-            "currentClient",
-            JSON.stringify(user.access_token)
-          );
-          localStorage.setItem(
-            "refreshToken",
-            JSON.stringify(user.refresh_token)
-          );
-          localStorage.setItem("EXPIRE", JSON.stringify(user.refresh_token));
-          localStorage.setItem("expireTime", JSON.stringify(user.expires_in));
-          this.httpClientSvc
-            .get(`${this.baseUrl}/api/v1/user/user-info`)
-            .subscribe({
-              next: (response: any) => {
-                if (response.code === 6000) {
-                  this.router.navigate([`/inbox`]);
-                  this.currentUser = response.data;
-                  localStorage.setItem(
-                    "userInfo",
-                    JSON.stringify(response.data)
-                  );
-                  this.offcanvasService.dismiss();
-                  this.toastSvc.success(
-                    "Hello",
-                    "Welcome " +
-                      this.currentUser.firstName +
-                      " " +
-                      this.currentUser.middleName +
-                      " " +
-                      this.currentUser.lastName,
-                    4000
-                  );
-                } else {
-                  Swal.fire("Sorry!", `${response.description}`, "error");
-                }
-              },
-            });
-        }
-      },
-      error: (error) => {
-        console.error(error);
-        Swal.fire("Sorry!", "Please check your username or password", "error");
-      },
-    });
+    let userName = payload?.username;
+    let password = payload?.password;
+    this.offcanvasService.dismiss();
+    this.router.navigate([`/inbox`]);
+    // this.authenticationSvc.login(userName, password).subscribe({
+    //   next: (user: any) => {
+    //     if (user) {
+    //       this.tokenExpiryTime = JSON.stringify(user.expires_in);
+    //       localStorage.setItem(
+    //         "currentClient",
+    //         JSON.stringify(user.access_token)
+    //       );
+    //       localStorage.setItem(
+    //         "refreshToken",
+    //         JSON.stringify(user.refresh_token)
+    //       );
+    //       localStorage.setItem("EXPIRE", JSON.stringify(user.refresh_token));
+    //       localStorage.setItem("expireTime", JSON.stringify(user.expires_in));
+    //       this.httpClientSvc
+    //         .get(`${this.baseUrl}/api/v1/user/user-info`)
+    //         .subscribe({
+    //           next: (response: any) => {
+    //             if (response.code === 6000) {
+    //               this.router.navigate([`/inbox`]);
+    //               this.currentUser = response.data;
+    //               localStorage.setItem(
+    //                 "userInfo",
+    //                 JSON.stringify(response.data)
+    //               );
+    //               this.offcanvasService.dismiss();
+    //               this.toastSvc.success(
+    //                 "Hello",
+    //                 "Welcome " +
+    //                   this.currentUser.firstName +
+    //                   " " +
+    //                   this.currentUser.middleName +
+    //                   " " +
+    //                   this.currentUser.lastName,
+    //                 4000
+    //               );
+    //             } else {
+    //               Swal.fire("Sorry!", `${response.description}`, "error");
+    //             }
+    //           },
+    //         });
+    //     }
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //     Swal.fire("Sorry!", "Please check your username or password", "error");
+    //   },
+    // });
   }
 
   searchUserByEmail(){
